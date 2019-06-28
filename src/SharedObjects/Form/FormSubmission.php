@@ -57,7 +57,7 @@ class FormSubmission implements SharedObjectInterface
     {
         return [
             'id'=>$this->getId(),
-            'form_id'=>($this->getForm() ? $this->getForm()->getId() : null),
+            'form_key'=>($this->getForm() ? $this->getForm()->getFormKey() : null),
             'status_id'=>($this->getStatus() ? $this->getStatus()->getId() : null),
             'preview'=>$this->getPreview(),
             'values'=>$this->getValues(),
