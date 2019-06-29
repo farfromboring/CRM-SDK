@@ -80,6 +80,24 @@ class AbstractUser implements UserInterface, SharedObjectInterface
     }
 
     /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     * @return self
+     */
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * @return Session|null
      */
     public function getSession(): ?Session
@@ -89,9 +107,9 @@ class AbstractUser implements UserInterface, SharedObjectInterface
 
     /**
      * @param Session|null $session
-     * @return AbstractUser
+     * @return self
      */
-    public function setSession(?Session $session): AbstractUser
+    public function setSession(?Session $session): self
     {
         $this->session = $session;
         return $this;
