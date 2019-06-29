@@ -1,5 +1,5 @@
 <?php
-namespace CRM_SDK\SharedObjects\Order;
+namespace CRM_SDK\SharedObjects\Payment;
 
 use CRM_SDK\Interfaces\APIObjectInterface;
 use CRM_SDK\Traits\APIObjectTrait;

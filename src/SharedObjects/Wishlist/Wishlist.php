@@ -1,12 +1,13 @@
 <?php
-namespace CRM_SDK\ResponseObjects\Wishlist;
+namespace CRM_SDK\SharedObjects\Wishlist;
 
-use CRM_SDK\ResponseObjects\Product\WishlistProduct;
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\SharedObjects\Product\WishlistProduct;
+use CRM_SDK\Traits\APIObjectTrait;
 
-class Wishlist
+class Wishlist implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
 
     /** @var int  */
     private $totalProducts = 0;
@@ -27,12 +28,22 @@ class Wishlist
             $cart_items = [];
             foreach ($results['products'] as $product)
             {
-                $cart_items[] = new WishlistProduct($product);
+                $cart_items[] = WishlistProduct::create()->populateFromAPIResults($product);
             }
             $this->setProducts($cart_items);
         }
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+
+        ];
     }
 
     /**

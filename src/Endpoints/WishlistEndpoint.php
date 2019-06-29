@@ -7,7 +7,7 @@ use CRM_SDK\Exceptions\APIForbiddenException;
 use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
-use CRM_SDK\ResponseObjects\Wishlist\Wishlist;
+use CRM_SDK\SharedObjects\Wishlist\Wishlist;
 use GuzzleHttp\Exception\GuzzleException;
 
 class WishlistEndpoint extends Client

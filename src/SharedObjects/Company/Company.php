@@ -2,7 +2,7 @@
 namespace CRM_SDK\SharedObjects\Company;
 
 use CRM_SDK\SharedObjects\Address\Address;
-use CRM_SDK\SharedObjects\Order\PaymentMethod;
+use CRM_SDK\SharedObjects\Payment\PaymentMethod;
 use CRM_SDK\SharedObjects\Payment\PaymentTerms;
 use CRM_SDK\Interfaces\APIObjectInterface;
 use CRM_SDK\Traits\APIObjectTrait;
@@ -94,7 +94,7 @@ class Company implements APIObjectInterface
         }
         if( !empty($results['payment_method']) )
         {
-            $this->setPaymentMethod(PaymentTerms::create()->populateFromAPIResults($results['payment_method']));
+            $this->setPaymentMethod(PaymentMethod::create()->populateFromAPIResults($results['payment_method']));
         }
         if( isset($results['credit_limit']) && !is_null($results['credit_limit']) )
         {

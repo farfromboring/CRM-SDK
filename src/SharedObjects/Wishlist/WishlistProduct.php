@@ -1,24 +1,28 @@
 <?php
-namespace CRM_SDK\ResponseObjects\Product;
+namespace CRM_SDK\SharedObjects\Product;
+
+use CRM_SDK\Traits\APIObjectTrait;
 
 class WishlistProduct extends Product
 {
+    use APIObjectTrait;
+
     /** @var int */
     private $wishlistProductID;
     /** @var \DateTime|null */
     private $dateAddedToWishlist;
 
     /**
-     * User constructor.
      * @param array $results
+     * @return WishlistProduct
      * @throws \Exception
      */
-    public function __construct(array $results)
+    public function populateFromAPIResults(array $results)
     {
         $this->setWishlistProductID((int) $results['wishlist_product_id']);
-        $this->setDateAdded((!empty($results['date_added_to_wishlist']) ? new \DateTime($results['date_added_to_wishlist']) : null));
+        $this->setDateAddedToWishlist((!empty($results['date_added_to_wishlist']) ? new \DateTime($results['date_added_to_wishlist']) : null));
 
-        parent::__construct($results);
+        parent::populateFromAPIResults($results);
 
         return $this;
     }
