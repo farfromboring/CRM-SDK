@@ -2,9 +2,9 @@
 namespace CRM_SDK\SharedObjects\User;
 
 use CRM_SDK\Endpoints\GuestUserEndpoint;
-use CRM_SDK\SharedObjects\SharedObjectInterface;
+use CRM_SDK\Interfaces\APIObjectInterface;
 
-class Guest extends AbstractUser implements UserInterface, SharedObjectInterface
+class Guest extends AbstractUser implements UserInterface, APIObjectInterface
 {
     /** @var string|null */
     private $token;

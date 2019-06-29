@@ -1,11 +1,11 @@
 <?php
 namespace CRM_SDK\SharedObjects\Form;
 
-use CRM_SDK\SharedObjects\SharedObjectInterface;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
-use CRM_SDK\SharedObjects\Traits\IDTrait;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\IDTrait;
 
-class FormSubmission implements SharedObjectInterface
+class FormSubmission implements APIObjectInterface
 {
     use CreateTrait;
 

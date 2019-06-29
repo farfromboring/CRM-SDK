@@ -1,5 +1,5 @@
 <?php
-namespace CRM_SDK;
+namespace CRM_SDK\Interfaces;
 
 interface DropdownInterface
 {

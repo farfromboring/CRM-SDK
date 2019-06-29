@@ -2,9 +2,9 @@
 namespace CRM_SDK\SharedObjects\Order;
 
 use CRM_SDK\SharedObjects\Cart\Cart;
-use CRM_SDK\SharedObjects\SharedObjectInterface;
+use CRM_SDK\Interfaces\APIObjectInterface;
 
-class Order extends Cart implements SharedObjectInterface
+class Order extends Cart implements APIObjectInterface
 {
     /** @var OrderStatus */
     private $status;

@@ -1,9 +1,9 @@
 <?php
 namespace CRM_SDK\ResponseObjects\PublicStores;
 
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
-use CRM_SDK\SharedObjects\Traits\DateAddedTrait;
-use CRM_SDK\SharedObjects\Traits\IDTrait;
+use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\DateAddedTrait;
+use CRM_SDK\Traits\IDTrait;
 use DateTime;
 
 class Domain

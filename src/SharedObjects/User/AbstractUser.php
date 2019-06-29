@@ -3,12 +3,12 @@ namespace CRM_SDK\SharedObjects\User;
 
 use CRM_SDK\ResponseObjects\Authentication\Session;
 use CRM_SDK\SharedObjects\Company\Company;
-use CRM_SDK\SharedObjects\SharedObjectInterface;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
-use CRM_SDK\SharedObjects\Traits\DateAddedTrait;
-use CRM_SDK\SharedObjects\Traits\IDTrait;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\DateAddedTrait;
+use CRM_SDK\Traits\IDTrait;
 
-class AbstractUser implements UserInterface, SharedObjectInterface
+class AbstractUser implements UserInterface, APIObjectInterface
 {
     use CreateTrait;
 
@@ -37,7 +37,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
 
     /**
      * @param array $results
-     * @return self
+     * @return mixed
      * @throws \Exception
      */
     public function populateFromAPIResults(array $results)
@@ -89,9 +89,9 @@ class AbstractUser implements UserInterface, SharedObjectInterface
 
     /**
      * @param Session|null $session
-     * @return self
+     * @return mixed
      */
-    public function setSession(?Session $session): self
+    public function setSession(?Session $session)
     {
         $this->session = $session;
         return $this;
@@ -109,7 +109,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
      * @param string|null $fname
      * @return UserInterface
      */
-    public function setFname(?string $fname): self
+    public function setFname(?string $fname)
     {
         $this->fname = $fname;
         return $this;
@@ -127,7 +127,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
      * @param string|null $lname
      * @return UserInterface
      */
-    public function setLname(?string $lname): self
+    public function setLname(?string $lname)
     {
         $this->lname = $lname;
         return $this;
@@ -145,7 +145,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
      * @param string|null $email
      * @return UserInterface
      */
-    public function setEmail(?string $email): self
+    public function setEmail(?string $email)
     {
         $this->email = $email;
         return $this;
@@ -163,7 +163,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
      * @param string|null $jobTitle
      * @return UserInterface
      */
-    public function setJobTitle(?string $jobTitle): self
+    public function setJobTitle(?string $jobTitle)
     {
         $this->jobTitle = $jobTitle;
         return $this;
@@ -181,7 +181,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
      * @param string|null $birthday
      * @return UserInterface
      */
-    public function setBirthday(?string $birthday): self
+    public function setBirthday(?string $birthday)
     {
         $this->birthday = $birthday;
         return $this;
@@ -199,7 +199,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
      * @param Company|null $company
      * @return UserInterface
      */
-    public function setCompany(?Company $company): self
+    public function setCompany(?Company $company)
     {
         $this->company = $company;
         return $this;
@@ -217,7 +217,7 @@ class AbstractUser implements UserInterface, SharedObjectInterface
      * @param string|null $password
      * @return UserInterface
      */
-    public function setPassword(?string $password): self
+    public function setPassword(?string $password)
     {
         $this->password = $password;
         return $this;

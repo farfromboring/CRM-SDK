@@ -2,12 +2,12 @@
 namespace CRM_SDK\SharedObjects\Order;
 
 use CRM_SDK\SharedObjects\Address\Address;
-use CRM_SDK\SharedObjects\SharedObjectInterface;
+use CRM_SDK\Interfaces\APIObjectInterface;
 use CRM_SDK\SharedObjects\Shipping\TrackingNumber;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
-use CRM_SDK\SharedObjects\Traits\IDTrait;
+use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\IDTrait;
 
-class OrderShipment implements SharedObjectInterface
+class OrderShipment implements APIObjectInterface
 {
     use CreateTrait;
     use IDTrait;

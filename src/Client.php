@@ -6,7 +6,7 @@ use CRM_SDK\Exceptions\APIForbiddenException;
 use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
+use CRM_SDK\Traits\CreateTrait;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;

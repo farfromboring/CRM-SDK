@@ -1,5 +1,5 @@
 <?php
-namespace CRM_SDK\SharedObjects\Traits;
+namespace CRM_SDK\Traits;
 
 trait IDToArrayTrait
 {

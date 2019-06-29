@@ -1,14 +1,14 @@
 <?php
 namespace CRM_SDK\SharedObjects\Product;
 
-use CRM_SDK\SharedObjects\SharedObjectInterface;
+use CRM_SDK\Interfaces\APIObjectInterface;
 use CRM_SDK\SharedObjects\Supplier\Supplier;
-use CRM_SDK\SharedObjects\Traits\DateAddedTrait;
-use CRM_SDK\SharedObjects\Traits\IDToArrayTrait;
-use CRM_SDK\SharedObjects\Traits\IDTrait;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
+use CRM_SDK\Traits\DateAddedTrait;
+use CRM_SDK\Traits\IDToArrayTrait;
+use CRM_SDK\Traits\IDTrait;
+use CRM_SDK\Traits\CreateTrait;
 
-class Product implements SharedObjectInterface
+class Product implements APIObjectInterface
 {
     use CreateTrait;
 

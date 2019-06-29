@@ -1,10 +1,10 @@
 <?php
-namespace CRM_SDK\SharedObjects\Traits;
+namespace CRM_SDK\Traits;
 
 trait CreateTrait
 {
     /**
-     * @return self
+     * @return mixed
      */
     public static function create()
     {

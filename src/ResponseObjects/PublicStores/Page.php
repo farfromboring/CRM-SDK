@@ -1,7 +1,7 @@
 <?php
 namespace CRM_SDK\ResponseObjects\PublicStores;
 
-use CRM_SDK\SharedObjects\Traits\IDTrait;
+use CRM_SDK\Traits\IDTrait;
 
 class Page
 {

@@ -1,13 +1,13 @@
 <?php
 namespace CRM_SDK\SharedObjects\Company;
 
-use CRM_SDK\DropdownInterface;
-use CRM_SDK\SharedObjects\SharedObjectInterface;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
-use CRM_SDK\SharedObjects\Traits\IDAndNameTrait;
-use CRM_SDK\SharedObjects\Traits\IDToArrayTrait;
+use CRM_SDK\Interfaces\DropdownInterface;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\IDAndNameTrait;
+use CRM_SDK\Traits\IDToArrayTrait;
 
-class NumberOfEvents implements SharedObjectInterface, DropdownInterface
+class NumberOfEvents implements APIObjectInterface, DropdownInterface
 {
     use CreateTrait;
     use IDToArrayTrait;

@@ -2,7 +2,7 @@
 namespace CRM_SDK\ResponseObjects\Wishlist;
 
 use CRM_SDK\ResponseObjects\Product\WishlistProduct;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
+use CRM_SDK\Traits\CreateTrait;
 
 class Wishlist
 {

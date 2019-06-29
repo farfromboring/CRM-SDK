@@ -3,12 +3,12 @@ namespace CRM_SDK\SharedObjects\Company;
 
 use CRM_SDK\SharedObjects\Address\Address;
 use CRM_SDK\SharedObjects\Payment\PaymentTerms;
-use CRM_SDK\SharedObjects\SharedObjectInterface;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
-use CRM_SDK\SharedObjects\Traits\DateAddedTrait;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\DateAddedTrait;
 use CRM_SDK\SharedObjects\User\User;
 
-class Company implements SharedObjectInterface
+class Company implements APIObjectInterface
 {
     use CreateTrait;
     use DateAddedTrait;

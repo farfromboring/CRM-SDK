@@ -2,12 +2,12 @@
 namespace CRM_SDK\SharedObjects\Cart;
 
 use CRM_SDK\SharedObjects\Product\Product;
-use CRM_SDK\SharedObjects\SharedObjectInterface;
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
-use CRM_SDK\SharedObjects\Traits\DateAddedTrait;
-use CRM_SDK\SharedObjects\Traits\IDTrait;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\DateAddedTrait;
+use CRM_SDK\Traits\IDTrait;
 
-class CartItem implements SharedObjectInterface
+class CartItem implements APIObjectInterface
 {
     use CreateTrait;
 

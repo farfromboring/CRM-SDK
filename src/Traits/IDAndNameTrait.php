@@ -1,5 +1,5 @@
 <?php
-namespace CRM_SDK\SharedObjects\Traits;
+namespace CRM_SDK\Traits;
 
 trait IDAndNameTrait
 {
@@ -42,7 +42,7 @@ trait IDAndNameTrait
 
     /**
      * @param string|null $name
-     * @return self
+     * @return mixed
      */
     public function setName(?string $name): self
     {

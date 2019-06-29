@@ -1,7 +1,7 @@
 <?php
 namespace CRM_SDK\ResponseObjects\Authentication;
 
-use CRM_SDK\SharedObjects\Traits\CreateTrait;
+use CRM_SDK\Traits\CreateTrait;
 use CRM_SDK\SharedObjects\User\User;
 use DateTime;
 

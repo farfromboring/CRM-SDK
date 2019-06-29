@@ -1,5 +1,5 @@
 <?php
-namespace CRM_SDK\SharedObjects\Traits;
+namespace CRM_SDK\Traits;
 
 trait DateAddedTrait
 {
@@ -16,9 +16,9 @@ trait DateAddedTrait
 
     /**
      * @param \DateTime|null $dateAdded
-     * @return self
+     * @return mixed
      */
-    public function setDateAdded(?\DateTime $dateAdded): self
+    public function setDateAdded(?\DateTime $dateAdded)
     {
         $this->dateAdded = $dateAdded;
         return $this;

@@ -1,5 +1,5 @@
 <?php
-namespace CRM_SDK\SharedObjects\Traits;
+namespace CRM_SDK\Traits;
 
 trait IDTrait
 {
@@ -16,9 +16,9 @@ trait IDTrait
 
     /**
      * @param int|null $id
-     * @return self
+     * @return mixed
      */
-    public function setId(?int $id): self
+    public function setId(?int $id)
     {
         $this->id = $id;
         return $this;

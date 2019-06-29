@@ -1,7 +1,7 @@
 <?php
-namespace CRM_SDK\SharedObjects;
+namespace CRM_SDK\Interfaces;
 
-interface SharedObjectInterface
+interface APIObjectInterface
 {
     /**
      * @return array
@@ -14,7 +14,7 @@ interface SharedObjectInterface
     public function populateFromAPIResults(array $results);
 
     /**
-     * @return self
+     * @return mixed
      */
     public static function create();
 }
