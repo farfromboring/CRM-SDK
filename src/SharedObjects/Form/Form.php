@@ -9,8 +9,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class Form implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     //form_key for each generic form
     const CONTACT_US = 'contact-us';

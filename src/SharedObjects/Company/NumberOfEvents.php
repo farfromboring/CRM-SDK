@@ -10,8 +10,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class NumberOfEvents implements APIObjectInterface, DropdownInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const ONE = 1;
     const TWO = 2;

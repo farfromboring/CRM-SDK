@@ -10,7 +10,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class PaymentTerms implements APIObjectInterface, DropdownInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const PRE_PAYMENT = 1;
     const DUE_ON_RECEIPT = 2;
@@ -20,8 +22,6 @@ class PaymentTerms implements APIObjectInterface, DropdownInterface
     const NET_45 = 5;
     const NET_60 = 6;
     const NET_90 = 10;
-
-    use IDAndNameTrait;
 
     /**
      * @return array

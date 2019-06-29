@@ -10,7 +10,6 @@ use CRM_SDK\Traits\IDTrait;
 class CartItem implements APIObjectInterface
 {
     use APIObjectTrait;
-
     use IDTrait;
     use DateAddedTrait;
 

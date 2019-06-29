@@ -9,8 +9,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class ImprintMethod implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const PAD_PRINT = 1;
     const SCREENPRINT = 2;

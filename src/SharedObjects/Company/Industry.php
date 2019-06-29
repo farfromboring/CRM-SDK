@@ -9,6 +9,7 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class Industry implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 }

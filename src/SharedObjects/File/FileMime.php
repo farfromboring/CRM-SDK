@@ -9,8 +9,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class FileMime implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     /** @var bool */
     private $isWebSafe;

@@ -10,8 +10,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class CreditCardStatus implements APIObjectInterface, DropdownInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const ACTIVE = 1;
     const EXPIRED = 2;

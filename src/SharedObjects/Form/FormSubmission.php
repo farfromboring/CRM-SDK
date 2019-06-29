@@ -8,7 +8,6 @@ use CRM_SDK\Traits\IDTrait;
 class FormSubmission implements APIObjectInterface
 {
     use APIObjectTrait;
-
     use IDTrait;
 
     /** @var Form */

@@ -10,8 +10,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class LeadStatus implements APIObjectInterface, DropdownInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const OPEN = 1;
     const CONTACTED = 2;

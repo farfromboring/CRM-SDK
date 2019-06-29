@@ -9,8 +9,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class FileType implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const IMAGE = 1;
     const PDF = 2;

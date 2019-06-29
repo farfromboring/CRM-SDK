@@ -10,8 +10,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class CreditCardType implements APIObjectInterface, DropdownInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const VISA = 1;
     const MASTERCARD = 2;

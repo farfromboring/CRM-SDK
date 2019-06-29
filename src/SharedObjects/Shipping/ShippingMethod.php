@@ -9,6 +9,7 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class ShippingMethod implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDAndNameTrait;
-    use IDToArrayTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 }

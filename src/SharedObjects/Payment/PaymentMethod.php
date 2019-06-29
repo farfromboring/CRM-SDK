@@ -9,8 +9,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class PaymentMethod implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     //may not be a complete list
     const CREDIT_CARD = 1;

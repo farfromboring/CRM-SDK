@@ -10,8 +10,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class LeadSource implements APIObjectInterface, DropdownInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     //not a complete list, just generic ones
     const WEBSITE_CALL_IN = 1;

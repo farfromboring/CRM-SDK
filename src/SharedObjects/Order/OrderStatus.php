@@ -9,8 +9,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class OrderStatus implements APIObjectInterface
 {
     use APIObjectTrait;
-    use IDToArrayTrait;
-    use IDAndNameTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     //not a complete list (others are subject to change, it's best you avoid hardcoding them)
     const COMPLETED = 20;

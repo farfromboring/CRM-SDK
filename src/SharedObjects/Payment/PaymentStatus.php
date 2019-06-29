@@ -10,8 +10,9 @@ use CRM_SDK\Traits\IDToArrayTrait;
 class PaymentStatus implements APIObjectInterface, DropdownInterface
 {
     use APIObjectTrait;
-    use IDAndNameTrait;
-    use IDToArrayTrait;
+    use IDAndNameTrait, IDToArrayTrait {
+        IDToArrayTrait::toArray insteadof IDAndNameTrait;
+    }
 
     const INVOICE_NOT_SENT = 1;
     const INVOICE_SENT = 2;
