@@ -10,7 +10,6 @@ use CRM_SDK\Exceptions\APIUnauthorizedException;
 use CRM_SDK\Exceptions\AuthFailure;
 use CRM_SDK\ResponseObjects\Authentication\ExpiredSession;
 use CRM_SDK\ResponseObjects\Authentication\Session;
-use CRM_SDK\ResponseObjects\Authentication\Token;
 use DateTime;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
@@ -26,7 +25,7 @@ class AuthenticationEndpoint extends Client
      * @param string $password
      * @param string $username_label
      * @param DateTime|null $date_session_expires
-     * @return Token
+     * @return Session
      * @throws APIForbiddenException
      * @throws APIInternalServerErrorException
      * @throws APIResourceNotFoundException
@@ -50,7 +49,7 @@ class AuthenticationEndpoint extends Client
             throw new AuthFailure($e->getMessage());
         }
 
-        return Token::create()->populateFromAPIResults($results['token']);
+        return Session::create()->populateFromAPIResults($results);
     }
 
     /**
