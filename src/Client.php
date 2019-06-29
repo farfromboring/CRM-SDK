@@ -271,6 +271,7 @@ class Client implements EndpointInterface
      * @throws Exception
      */
     public static function create(){
-        return new self();
+        $cur_endpoint = __CLASS__;
+        return new $cur_endpoint();
     }
 }
