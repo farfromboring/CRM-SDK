@@ -1,13 +1,14 @@
 <?php
 namespace CRM_SDK\ResponseObjects\Authentication;
 
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\SharedObjects\User\User;
 use DateTime;
 
-class Session
+class Session implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
 
     /** @var Token */
     private $token;
@@ -35,6 +36,13 @@ class Session
         $this->user = User::create()->populateFromAPIResults($results['user']);
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'token'=>$this->getToken()
+        ];
     }
 
     /**

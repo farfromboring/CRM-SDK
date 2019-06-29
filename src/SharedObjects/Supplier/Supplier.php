@@ -5,11 +5,11 @@ use CRM_SDK\SharedObjects\Product\DataSource;
 use CRM_SDK\Traits\DateAddedTrait;
 use CRM_SDK\Traits\IDTrait;
 use CRM_SDK\Interfaces\APIObjectInterface;
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 
 class Supplier implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
 
     use IDTrait;
     use DateAddedTrait;

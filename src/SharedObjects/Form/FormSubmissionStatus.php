@@ -2,12 +2,12 @@
 namespace CRM_SDK\SharedObjects\Form;
 
 use CRM_SDK\Interfaces\APIObjectInterface;
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\IDAndNameTrait;
 
 class FormSubmissionStatus implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
 
     const RECEIVED = 1;
     const RESPONDED = 2;

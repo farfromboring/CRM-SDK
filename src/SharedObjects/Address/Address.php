@@ -1,13 +1,13 @@
 <?php
 namespace CRM_SDK\SharedObjects\Address;
 
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\IDTrait;
 use CRM_SDK\Interfaces\APIObjectInterface;
 
 class Address implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
     use IDTrait;
 
     /** @var boolean */

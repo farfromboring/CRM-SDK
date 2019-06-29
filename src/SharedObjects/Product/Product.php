@@ -6,11 +6,11 @@ use CRM_SDK\SharedObjects\Supplier\Supplier;
 use CRM_SDK\Traits\DateAddedTrait;
 use CRM_SDK\Traits\IDToArrayTrait;
 use CRM_SDK\Traits\IDTrait;
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 
 class Product implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
 
     use IDTrait;
     use IDToArrayTrait;

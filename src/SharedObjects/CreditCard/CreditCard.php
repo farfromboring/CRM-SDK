@@ -3,12 +3,12 @@ namespace CRM_SDK\SharedObjects\CreditCard;
 
 use CRM_SDK\SharedObjects\Address\Address;
 use CRM_SDK\Interfaces\APIObjectInterface;
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\IDTrait;
 
 class CreditCard implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
     use IDTrait;
 
     /** @var CreditCardType|null */

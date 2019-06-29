@@ -3,13 +3,13 @@ namespace CRM_SDK\SharedObjects\Payment;
 
 use CRM_SDK\Interfaces\DropdownInterface;
 use CRM_SDK\Interfaces\APIObjectInterface;
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\IDAndNameTrait;
 use CRM_SDK\Traits\IDToArrayTrait;
 
 class PaymentStatus implements APIObjectInterface, DropdownInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
     use IDAndNameTrait;
     use IDToArrayTrait;
 

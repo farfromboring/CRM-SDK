@@ -8,6 +8,7 @@ trait CreateTrait
      */
     public static function create()
     {
-        return new self();
+        $called_class = static::class;
+        return new $called_class();
     }
 }

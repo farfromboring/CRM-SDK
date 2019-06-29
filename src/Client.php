@@ -7,12 +7,15 @@ use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
 use CRM_SDK\Interfaces\EndpointInterface;
+use CRM_SDK\Traits\CreateTrait;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 
 class Client implements EndpointInterface
 {
+    use CreateTrait;
+
     /** @var string  */
     const ENVVARS_KEY = 'WEBWISEUSA_CRM_API_KEY';
 
@@ -264,14 +267,5 @@ class Client implements EndpointInterface
     protected function getBaseURL()
     {
         return $this->getAPIHost().'/api/v'.$this->api_version;
-    }
-
-    /**
-     * @return mixed
-     * @throws Exception
-     */
-    public static function create(){
-        $cur_endpoint = static::class;
-        return new $cur_endpoint();
     }
 }

@@ -1,12 +1,13 @@
 <?php
 namespace CRM_SDK\ResponseObjects\Authentication;
 
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\Traits\APIObjectTrait;
 use DateTime;
 
-class ExpiredSession
+class ExpiredSession implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
 
     /** @var Token */
     private $token;
@@ -25,6 +26,16 @@ class ExpiredSession
         $this->dateExpired = new DateTime($results['date_expired']);
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'token'=>$this->getToken()
+        ];
     }
 
     /**

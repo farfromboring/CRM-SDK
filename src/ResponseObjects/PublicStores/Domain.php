@@ -1,14 +1,14 @@
 <?php
 namespace CRM_SDK\ResponseObjects\PublicStores;
 
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\DateAddedTrait;
 use CRM_SDK\Traits\IDTrait;
 use DateTime;
 
 class Domain
 {
-    use CreateTrait;
+    use APIObjectTrait;
     use IDTrait;
     use DateAddedTrait;
 

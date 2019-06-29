@@ -6,13 +6,13 @@ use CRM_SDK\SharedObjects\CreditCard\CreditCard;
 use CRM_SDK\SharedObjects\Payment\PaymentStatus;
 use CRM_SDK\SharedObjects\Payment\PaymentTerms;
 use CRM_SDK\Interfaces\APIObjectInterface;
-use CRM_SDK\Traits\CreateTrait;
+use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\IDTrait;
 use CRM_SDK\SharedObjects\User\User;
 
 class OrderPayment implements APIObjectInterface
 {
-    use CreateTrait;
+    use APIObjectTrait;
     use IDTrait;
 
     /** @var PaymentMethod|null */

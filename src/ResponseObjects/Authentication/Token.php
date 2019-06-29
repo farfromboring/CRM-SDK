@@ -22,6 +22,16 @@ class Token
     }
 
     /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'token'=>$this->getToken()
+        ];
+    }
+
+    /**
      * @return string|null
      */
     public function getToken(): ?string
