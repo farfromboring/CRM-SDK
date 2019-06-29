@@ -2,6 +2,7 @@
 namespace CRM_SDK\SharedObjects\Company;
 
 use CRM_SDK\SharedObjects\Address\Address;
+use CRM_SDK\SharedObjects\Order\PaymentMethod;
 use CRM_SDK\SharedObjects\Payment\PaymentTerms;
 use CRM_SDK\Interfaces\APIObjectInterface;
 use CRM_SDK\Traits\APIObjectTrait;
@@ -37,6 +38,8 @@ class Company implements APIObjectInterface
     /** @var integer|null */
     private $referrerFee;
 
+    /** @var PaymentMethod|null */
+    private $paymentMethod;
     /** @var PaymentTerms|null */
     private $paymentTerms;
     /** @var int|null */
@@ -88,6 +91,10 @@ class Company implements APIObjectInterface
         if( !empty($results['payment_terms']) )
         {
             $this->setPaymentTerms(PaymentTerms::create()->populateFromAPIResults($results['payment_terms']));
+        }
+        if( !empty($results['payment_method']) )
+        {
+            $this->setPaymentMethod(PaymentTerms::create()->populateFromAPIResults($results['payment_method']));
         }
         if( isset($results['credit_limit']) && !is_null($results['credit_limit']) )
         {
@@ -146,6 +153,7 @@ class Company implements APIObjectInterface
             'referrer'=>$this->getReferrer(),
             'referrer_fee'=>$this->getReferrerFee(),
 
+            'payment_method_id'=>($this->getPaymentMethod() ? $this->getPaymentMethod()->getId() : null),
             'payment_terms_id'=>($this->getPaymentTerms() ? $this->getPaymentTerms()->getId() : null),
             'credit_limit'=>$this->getCreditLimit(),
 
@@ -463,6 +471,24 @@ class Company implements APIObjectInterface
     public function setLeadStatus(?LeadStatus $leadStatus): Company
     {
         $this->leadStatus = $leadStatus;
+        return $this;
+    }
+
+    /**
+     * @return PaymentMethod|null
+     */
+    public function getPaymentMethod(): ?PaymentMethod
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * @param PaymentMethod|null $paymentMethod
+     * @return Company
+     */
+    public function setPaymentMethod(?PaymentMethod $paymentMethod): Company
+    {
+        $this->paymentMethod = $paymentMethod;
         return $this;
     }
 

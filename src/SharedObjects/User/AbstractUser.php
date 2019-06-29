@@ -11,7 +11,6 @@ use CRM_SDK\Traits\IDTrait;
 class AbstractUser implements UserInterface, APIObjectInterface
 {
     use APIObjectTrait;
-
     use IDTrait;
     use DateAddedTrait;
 
