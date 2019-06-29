@@ -32,9 +32,7 @@ class Session
         $this->dateCreated = new DateTime($results['date_created']);
         $this->dateExpires = new DateTime($results['date_expires']);
 
-        $this->user = User::create()->populateFromAPIResults([
-            'id'=>$results['user_id']
-        ]);
+        $this->user = User::create()->populateFromAPIResults($results['user']);
 
         return $this;
     }
