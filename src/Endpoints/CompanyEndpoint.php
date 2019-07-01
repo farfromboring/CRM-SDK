@@ -7,11 +7,31 @@ use CRM_SDK\Exceptions\APIForbiddenException;
 use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
+use CRM_SDK\SharedObjects\Company\Company;
 use GuzzleHttp\Exception\GuzzleException;
 
 class CompanyEndpoint extends Client
 {
     protected $endpoint ='/company';
+
+    /**
+     * Allows you to update a company's basic details
+     *
+     * @param Company $company
+     * @return array
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     */
+    public function updateCompany(Company $company)
+    {
+        return $this->patch($this->endpoint, [
+            'company'=>$company->toArray()
+        ]);
+    }
 
     /**
      * Gets the industry options for a dropdown.
