@@ -72,7 +72,7 @@ $company = new Company(); //or Company::create()
 //set values (generally from a user submitted form)
 //it's a very good idea to perform your own validation on this data prior to setting it
 $user->setFname($_POST['fname']);
-$user->setLname($_POST['lname']');
+$user->setLname($_POST['lname']);
 $user->setEmail($_POST['email']);
 
 $company->setName($_POST['company']);
