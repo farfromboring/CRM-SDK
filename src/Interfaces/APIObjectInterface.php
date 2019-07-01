@@ -14,7 +14,7 @@ interface APIObjectInterface
     public function populateFromAPIResults(array $results);
 
     /**
-     * @return mixed
+     * @return static
      */
     public static function create();
 }
