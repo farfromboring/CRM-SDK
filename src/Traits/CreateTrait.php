@@ -4,7 +4,7 @@ namespace CRM_SDK\Traits;
 trait CreateTrait
 {
     /**
-     * @return mixed
+     * @return static
      */
     public static function create()
     {
