@@ -157,6 +157,9 @@ class GuestUserEndpoint extends Client
      */
     public static function setGuestCookie(string $token, ?int $expiration_in_seconds = null)
     {
+        //remove cookie headers because clearGuestCookie() might be conflicting with the below setcookie
+        header_remove("Set-Cookie");
+
         $expiration_in_seconds = $expiration_in_seconds ?: self::cookieExpiration;
 
         //for this request in case there are additional API calls
@@ -175,6 +178,5 @@ class GuestUserEndpoint extends Client
     public static function clearGuestCookie()
     {
         unset($_COOKIE[self::GUEST_TOKEN_COOKIE]);
-        return setcookie(GuestUserEndpoint::GUEST_TOKEN_COOKIE, null, 1);
     }
 }
