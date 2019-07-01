@@ -83,7 +83,7 @@ $user->setCompany($company);
 $user_sdk = new UserEndpoint(); //or UserEndpoint::create()
 
 //an exception will be thrown if anything other than a 200 is returned
-//the SharedObjects\User\User object is returned on success
+//an updated User object is returned on success
 $new_user = $user_sdk->addUser($user);
 ```
 
