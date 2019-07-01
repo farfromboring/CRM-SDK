@@ -55,7 +55,7 @@ class GuestUserEndpoint extends Client
         {
             if( $t->getMessage() === 'Guest token does not exist or has expired' )
             {
-                self::clearGuestCookie();
+//                self::clearGuestCookie();
                 return null;
             }
 
