@@ -97,14 +97,17 @@ Users come in 3 flavors:
 
 Any endpoint method that accepts/requires a $user_id accepts the ID of any of these users. $guest->getId() for instance.
 
-To create a Guest: 
+You can create a Guest using information they provided on your Contact Us form (or any other form),
+or as a totally blank anonymous Guest (like if someone adds a product to their cart)
 ```php
-$sdk = new GuestEndpoint();
-
 $guest = new Guest();
 $guest->setFname('Bob');
 $guest->setLname('Jenkins');
 $guest->setEmail('bob@jenkins.com');
 
-$sdk->addGuest();
+$guest = (new GuestEndpoint())->addGuest($guest);
+
+//or
+
+$guest = (new GuestEndpoint())->addGuest();
 ```
