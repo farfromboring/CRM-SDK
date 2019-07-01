@@ -100,6 +100,9 @@ class GuestUserEndpoint extends Client
      * Adds a guest user (doesn't log them in or generate a password, but it does create a unique token, which is automatically stored
      * in a cookie and used for subsequent requests to attempt to tie everything to the same person)
      *
+     * If you don't have ANY information about the user (like someone who adds a product to their cart),
+     * then don't pass the Guest object and it'll create a blank Guest.
+     *
      * $guest = new Guest(); //or Guest::create()
      * $guest->setFname('Bob');
      * $guest->setLname('Jenkins');
@@ -126,10 +129,10 @@ class GuestUserEndpoint extends Client
      * @throws GuzzleException
      * @throws Exception
      */
-    public function addGuest(Guest $guest)
+    public function addGuest(?Guest $guest = null)
     {
         $results = $this->post($this->endpoint, [
-            'guest'=>$guest->toArray()
+            'guest'=>($guest ? $guest->toArray() : null)
         ]);
 
         return Guest::create()->populateFromAPIResults($results); //cookie is saved in the constructor so you can run getGuest() later without params
