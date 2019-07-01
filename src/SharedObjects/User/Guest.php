@@ -46,7 +46,7 @@ class Guest extends AbstractUser implements UserInterface, APIObjectInterface
         GuestUserEndpoint::setGuestCookie($this->getToken());
 
         //set rest of user fields
-        parent::populateFromAPIResults($results);
+        return parent::populateFromAPIResults($results);
     }
 
     /**
