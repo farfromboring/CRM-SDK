@@ -19,7 +19,7 @@ class GuestUserEndpoint extends Client
     /** @var string  */
     const GUEST_TOKEN_COOKIE = 'guest_token';
 
-    /** @var int - 1 year */
+    /** @var int - 1 hour */
     const cookieExpiration = 3600;
 
     protected $endpoint ='/user/guest';
