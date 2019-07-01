@@ -53,10 +53,14 @@ class GuestUserEndpoint extends Client
         }
         catch(\Throwable $t)
         {
+            //if the user does not exist or has expired, ignore the error and return null
+            // because odds are a new Guest will be created right after attempting to get one
             if( $t->getMessage() === 'Guest token does not exist or has expired' )
             {
-//                self::clearGuestCookie();
                 return null;
+                //do not clear the cookie here.
+                //If you do, and then the Guest is created after this, it will send a delete
+                // and set cookie header to the browser and it does not work
             }
 
             throw $t;
