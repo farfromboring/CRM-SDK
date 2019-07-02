@@ -3,6 +3,7 @@ namespace CRM_SDK\SharedObjects\Order;
 
 use CRM_SDK\SharedObjects\Address\Address;
 use CRM_SDK\SharedObjects\CreditCard\CreditCard;
+use CRM_SDK\SharedObjects\Payment\PaymentMethod;
 use CRM_SDK\SharedObjects\Payment\PaymentStatus;
 use CRM_SDK\SharedObjects\Payment\PaymentTerms;
 use CRM_SDK\Interfaces\APIObjectInterface;

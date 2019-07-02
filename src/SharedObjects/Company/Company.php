@@ -8,14 +8,14 @@ use CRM_SDK\Interfaces\APIObjectInterface;
 use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\DateAddedTrait;
 use CRM_SDK\SharedObjects\User\User;
+use CRM_SDK\Traits\IDTrait;
 
 class Company implements APIObjectInterface
 {
+    use IDTrait;
     use APIObjectTrait;
     use DateAddedTrait;
 
-    /** @var int */
-    private $id;
     /** @var string|null */
     private $name;
     /** @var string|null */
@@ -166,24 +166,6 @@ class Company implements APIObjectInterface
 
             'hq_address'=>($this->getHeadquartersAddress() ? $this->getHeadquartersAddress()->toArray() : null)
         ];
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return Company
-     */
-    public function setId(int $id): Company
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**

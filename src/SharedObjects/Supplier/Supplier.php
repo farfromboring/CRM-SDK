@@ -10,7 +10,6 @@ use CRM_SDK\Traits\APIObjectTrait;
 class Supplier implements APIObjectInterface
 {
     use APIObjectTrait;
-
     use IDTrait;
     use DateAddedTrait;
 
