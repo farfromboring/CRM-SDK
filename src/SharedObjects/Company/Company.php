@@ -16,7 +16,7 @@ class Company implements APIObjectInterface
 
     /** @var int */
     private $id;
-    /** @var string */
+    /** @var string|null */
     private $name;
     /** @var string|null */
     private $dba;
@@ -187,18 +187,18 @@ class Company implements APIObjectInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      * @return Company
      */
-    public function setName(string $name): Company
+    public function setName(?string $name): Company
     {
         $this->name = $name;
         return $this;
