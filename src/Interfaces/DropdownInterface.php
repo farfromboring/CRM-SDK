@@ -6,5 +6,5 @@ interface DropdownInterface
     /**
      * @return array
      */
-    public function dropdownOptions(): array;
+    public static function dropdownOptions(): array;
 }

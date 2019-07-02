@@ -21,7 +21,7 @@ class LeadStatus implements APIObjectInterface, DropdownInterface
     /**
      * @return array
      */
-    public function dropdownOptions(): array
+    public static function dropdownOptions(): array
     {
         return [
           self::OPEN=>'Open',

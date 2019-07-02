@@ -22,7 +22,7 @@ class PaymentStatus implements APIObjectInterface, DropdownInterface
     /**
      * @return array
      */
-    public function dropdownOptions(): array
+    public static function dropdownOptions(): array
     {
         return [
           self::INVOICE_NOT_SENT=>'Invoice Not Sent',

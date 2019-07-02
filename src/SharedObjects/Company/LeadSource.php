@@ -53,7 +53,7 @@ class LeadSource implements APIObjectInterface, DropdownInterface
      *
      * @return array
      */
-    public function dropdownOptions(): array
+    public static function dropdownOptions(): array
     {
         return [
             self::ONLINE_SEARCH_ENGINE=>'Found us on a Search Engine',

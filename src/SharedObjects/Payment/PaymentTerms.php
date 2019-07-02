@@ -26,7 +26,7 @@ class PaymentTerms implements APIObjectInterface, DropdownInterface
     /**
      * @return array
      */
-    public function dropdownOptions(): array
+    public static function dropdownOptions(): array
     {
         return [
             self::PRE_PAYMENT=>'Pre-Payment',

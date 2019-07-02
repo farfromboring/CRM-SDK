@@ -25,7 +25,7 @@ class NumberOfEmployees implements APIObjectInterface, DropdownInterface
     /**
      * @return array
      */
-    public function dropdownOptions(): array
+    public static function dropdownOptions(): array
     {
         return [
             self::ONE_TO_TEN=>'1-10',
