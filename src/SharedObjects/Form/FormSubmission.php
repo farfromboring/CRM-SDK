@@ -13,7 +13,7 @@ class FormSubmission implements APIObjectInterface
     /** @var Form */
     private $form;
 
-    /** @var FormSubmissionStatus */
+    /** @var FormSubmissionStatus|null */
     private $status;
 
     /** @var string|null */
@@ -85,7 +85,7 @@ class FormSubmission implements APIObjectInterface
     }
 
     /**
-     * @return FormSubmissionStatus
+     * @return FormSubmissionStatus|null
      */
     public function getStatus(): FormSubmissionStatus
     {
@@ -93,10 +93,10 @@ class FormSubmission implements APIObjectInterface
     }
 
     /**
-     * @param FormSubmissionStatus $status
+     * @param FormSubmissionStatus|null $status
      * @return FormSubmission
      */
-    public function setStatus(FormSubmissionStatus $status): FormSubmission
+    public function setStatus(?FormSubmissionStatus $status): FormSubmission
     {
         $this->status = $status;
         return $this;
