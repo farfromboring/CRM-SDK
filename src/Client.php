@@ -112,7 +112,7 @@ class Client implements EndpointInterface
         $data['client_user_agent'] = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
 
         if( $data ) {
-            $param = $method === 'POST' ? 'body' : 'query';
+            $param = $method === 'POST' ? 'multipart' : 'query';
             $options[$param] = $data;
         }
 
