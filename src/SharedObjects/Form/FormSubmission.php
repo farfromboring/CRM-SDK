@@ -87,7 +87,7 @@ class FormSubmission implements APIObjectInterface
     /**
      * @return FormSubmissionStatus|null
      */
-    public function getStatus(): FormSubmissionStatus
+    public function getStatus(): ?FormSubmissionStatus
     {
         return $this->status;
     }
