@@ -113,13 +113,8 @@ class Client implements EndpointInterface
 
         if( $data ) {
             //get param based on method
-            $param = $method === 'POST' ? 'multipart' : 'query';
+            $param = $method === 'POST' ? 'form_params' : 'query';
             $options[$param] = $data;
-            //if multipart, we need to provide the type of contents as data
-            if( $param === 'multipart' )
-            {
-                $options['contents'] = 'data';
-            }
         }
 
         //disabled exceptions per http code (they are handled below instead)
