@@ -112,8 +112,14 @@ class Client implements EndpointInterface
         $data['client_user_agent'] = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
 
         if( $data ) {
+            //get param based on method
             $param = $method === 'POST' ? 'multipart' : 'query';
             $options[$param] = $data;
+            //if multipart, we need to provide the type of contents as data
+            if( $param === 'multipart' )
+            {
+                $options['contents'] = 'data';
+            }
         }
 
         //disabled exceptions per http code (they are handled below instead)
