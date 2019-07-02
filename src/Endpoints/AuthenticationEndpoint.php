@@ -41,6 +41,7 @@ class AuthenticationEndpoint extends Client
                 'password' => $password,
                 'username_label'=>$username_label,
                 'date_expires'=>$date_session_expires ? $date_session_expires->format("Y-m-d H:i:s") : null,
+                GuestUserEndpoint::GUEST_USER_TOKEN=>GuestUserEndpoint::getGuestTokenFromCookie(),
             ]);
         }
         //if bad request, convert to auth failure
