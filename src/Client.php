@@ -113,7 +113,7 @@ class Client implements EndpointInterface
 
         if( $data ) {
             //get param based on method
-            $param = $method === 'POST' ? 'form_params' : 'query';
+            $param = in_array($method, ['PATCH','POST']) ? 'form_params' : 'query';
             $options[$param] = $data;
         }
 
