@@ -8,6 +8,7 @@ use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
 use CRM_SDK\SharedObjects\User\User;
+use CRM_SDK\SharedObjects\User\UserInterface;
 use DateTime;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
@@ -85,7 +86,7 @@ class UserEndpoint extends Client
      *
      * If user with this email address already exists, an exception will be thrown
      *
-     * @param User $user
+     * @param UserInterface $user
      * @param bool $send_welcome_email
      * @param bool $create_session
      * @param DateTime|null $date_session_expires
@@ -98,7 +99,7 @@ class UserEndpoint extends Client
      * @throws GuzzleException
      * @throws Exception
      */
-    public function addUser(User $user, $send_welcome_email = false, $create_session = false, ?DateTime $date_session_expires = null)
+    public function addUser(UserInterface $user, $send_welcome_email = false, $create_session = false, ?DateTime $date_session_expires = null)
     {
         $results = $this->post($this->endpoint, [
             'user'=>$user->toArray(),
