@@ -6,6 +6,16 @@ use CRM_SDK\SharedObjects\Company\Company;
 interface UserInterface
 {
     /**
+     * @return int|null
+     */
+    public function getId(): ?int;
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id);
+
+    /**
      * @return string|null
      */
     public function getFname(): ?string;
@@ -74,6 +84,16 @@ interface UserInterface
      * @param string|null $password
      */
     public function setPassword(?string $password);
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateAdded(): ?\DateTime;
+
+    /**
+     * @param \DateTime|null $dateAdded
+     */
+    public function setDateAdded(?\DateTime $dateAdded);
 
     /**
      * @return array
