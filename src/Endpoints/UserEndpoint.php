@@ -105,6 +105,7 @@ class UserEndpoint extends Client
             'send_welcome_email' => $send_welcome_email,
             'create_session'=>$create_session,
             'date_expires'=>$date_session_expires ? $date_session_expires->format("Y-m-d H:i:s") : null,
+            GuestUserEndpoint::GUEST_USER_TOKEN=>GuestUserEndpoint::getGuestTokenFromCookie(),
         ]);
 
         return User::create()->populateFromAPIResults($results);
