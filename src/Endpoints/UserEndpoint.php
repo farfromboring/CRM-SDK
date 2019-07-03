@@ -40,12 +40,7 @@ class UserEndpoint extends Client
     }
 
     /**
-     * @todo: Modify this to use the User request object instead of an array of data.
-     *
-     * Update a user's basic details, returns the updated user object
-     * The data array can contain fname, lname, email, job_title, birthday (MM/YY), password
-     *
-     * @param int $user_id
+     * @param User $user
      * @param array $data
      * @return User
      * @throws APIBadRequestException
@@ -55,12 +50,15 @@ class UserEndpoint extends Client
      * @throws APIUnauthorizedException
      * @throws GuzzleException
      * @throws Exception
+     *
+     * Update a user's basic details, returns the updated user object
+     * The data array can contain fname, lname, email, job_title, birthday (MM/YY), password
+     *
      */
-    public function updateUser(int $user_id, array $data)
+    public function updateUser(User $user)
     {
         $results = $this->patch($this->endpoint, [
-            'user_id' => $user_id,
-            'data'=>$data
+            'user'=>$user->toArray()
         ]);
 
         return User::create()->populateFromAPIResults($results);
