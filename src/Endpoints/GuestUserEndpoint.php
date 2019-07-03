@@ -91,13 +91,13 @@ class GuestUserEndpoint extends Client
      * @throws GuzzleException
      * @throws Exception
      */
-    public function updateGuest(Guest $guest)
+    public function updateGuest(Guest &$guest)
     {
         $results = $this->patch($this->endpoint, [
             'guest'=>$guest->toArray()
         ]);
 
-        return Guest::create()->populateFromAPIResults($results); //cookie is saved in the constructor so you can run getGuest() later without params
+        return $guest->populateFromAPIResults($results); //cookie is saved in the constructor so you can run getGuest() later without params
     }
 
     /**
@@ -133,13 +133,14 @@ class GuestUserEndpoint extends Client
      * @throws GuzzleException
      * @throws Exception
      */
-    public function addGuest(?Guest $guest = null)
+    public function addGuest(?Guest &$guest = null)
     {
         $results = $this->post($this->endpoint, [
             'guest'=>($guest ? $guest->toArray() : null)
         ]);
 
-        return Guest::create()->populateFromAPIResults($results); //cookie is saved in the constructor so you can run getGuest() later without params
+        //return the guest that was provided or a new guest if none was
+        return ($guest ?? Guest::create())->populateFromAPIResults($results); //cookie is saved in the constructor so you can run getGuest() later without params
     }
 
     /**

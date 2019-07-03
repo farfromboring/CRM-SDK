@@ -55,13 +55,13 @@ class UserEndpoint extends Client
      * The data array can contain fname, lname, email, job_title, birthday (MM/YY), password
      *
      */
-    public function updateUser(User $user)
+    public function updateUser(User &$user)
     {
         $results = $this->patch($this->endpoint, [
             'user'=>$user->toArray()
         ]);
 
-        return User::create()->populateFromAPIResults($results);
+        return $user->populateFromAPIResults($results);
     }
 
     /**
@@ -97,7 +97,7 @@ class UserEndpoint extends Client
      * @throws GuzzleException
      * @throws Exception
      */
-    public function addUser(UserInterface $user, $send_welcome_email = false, $create_session = false, ?DateTime $date_session_expires = null)
+    public function addUser(UserInterface &$user, $send_welcome_email = false, $create_session = false, ?DateTime $date_session_expires = null)
     {
         $results = $this->post($this->endpoint, [
             'user'=>$user->toArray(),
@@ -107,6 +107,6 @@ class UserEndpoint extends Client
             GuestUserEndpoint::GUEST_USER_TOKEN=>GuestUserEndpoint::getGuestTokenFromCookie(),
         ]);
 
-        return User::create()->populateFromAPIResults($results);
+        return $user->populateFromAPIResults($results);
     }
 }

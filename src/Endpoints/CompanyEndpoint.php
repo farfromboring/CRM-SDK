@@ -18,19 +18,22 @@ class CompanyEndpoint extends Client
      * Allows you to update a company's basic details
      *
      * @param Company $company
-     * @return array
+     * @return Company
      * @throws APIBadRequestException
      * @throws APIForbiddenException
      * @throws APIInternalServerErrorException
      * @throws APIResourceNotFoundException
      * @throws APIUnauthorizedException
      * @throws GuzzleException
+     * @throws \Exception
      */
-    public function updateCompany(Company $company)
+    public function updateCompany(Company &$company)
     {
-        return $this->patch($this->endpoint, [
+        $results = $this->patch($this->endpoint, [
             'company'=>$company->toArray()
         ]);
+
+        return $company->populateFromAPIResults($results);
     }
 
     /**
