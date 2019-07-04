@@ -111,6 +111,9 @@ class Client implements EndpointInterface
         $data['client_ip'] = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
         $data['client_user_agent'] = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
 
+        //convert null to "NULL" since it gets stripped from the request by Guzzle. The API will automatically swap "NULL" back to null.
+        $data = self::convertNullToString($data);
+
         if( $data ) {
             //get param based on method
             $param = in_array($method, ['PATCH','POST']) ? 'form_params' : 'query';
@@ -160,6 +163,36 @@ class Client implements EndpointInterface
         }
 
         return $response;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     * @throws APIBadRequestException
+     */
+    public static function convertNullToString(array $data)
+    {
+        foreach($data as $k=>$v)
+        {
+            //shouldn't happen, but since I'm already checking, might as well add it
+            if( is_object($v) )
+            {
+                throw new APIBadRequestException('Objects are not allowed');
+            }
+
+            //if it's an array, run it through the same method
+            if( is_array($v) )
+            {
+                $data[$k] = self::convertNullToString($v);
+            }
+            //otherwise keep it as the same value or 'NULL' if it's null
+            else
+            {
+                $data[$k] = is_null($v) ? 'NULL' : $v;
+            }
+        }
+
+        return $data;
     }
 
     /**
