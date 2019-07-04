@@ -71,7 +71,7 @@ class AuthenticationEndpoint extends Client
     public function createSessionFromLoginToken(string $token, ?DateTime $date_session_expires = null)
     {
         try {
-            $results = $this->get($this->endpoint.'/login-token', [
+            $results = $this->post($this->endpoint.'/login-token', [
                 'token' => $token,
                 'date_expires'=>$date_session_expires ? $date_session_expires->format("Y-m-d H:i:s") : null,
             ]);
