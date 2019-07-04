@@ -7,7 +7,7 @@ use CRM_SDK\Exceptions\APIForbiddenException;
 use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
-use CRM_SDK\Exceptions\AuthFailure;
+use CRM_SDK\Exceptions\AuthFailureException;
 use CRM_SDK\ResponseObjects\Authentication\ExpiredSession;
 use CRM_SDK\ResponseObjects\Authentication\Session;
 use DateTime;
@@ -30,8 +30,9 @@ class AuthenticationEndpoint extends Client
      * @throws APIInternalServerErrorException
      * @throws APIResourceNotFoundException
      * @throws APIUnauthorizedException
-     * @throws AuthFailure
+     * @throws AuthFailureException
      * @throws GuzzleException
+     * @throws Exception
      */
     public function createSession(string $username, string $password, string $username_label = 'Username', ?DateTime $date_session_expires = null)
     {
@@ -47,10 +48,33 @@ class AuthenticationEndpoint extends Client
         //if bad request, convert to auth failure
         catch(APIBadRequestException $e)
         {
-            throw new AuthFailure($e->getMessage());
+            throw new AuthFailureException($e->getMessage());
         }
 
         return Session::create()->populateFromAPIResults($results);
+    }
+
+    /**
+     * Sends the user an email with a temporary password if they forgot theirs
+     *
+     * Throws an APIBadRequestException if there is no account matching that email
+     *
+     * @param string $username
+     * @param string $username_label
+     * @return Session
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function forgotPassword(string $username, string $username_label = 'Username')
+    {
+        return $this->post($this->endpoint.'/forgot-password', [
+            'username' => $username,
+            'username_label'=>$username_label,
+        ]);
     }
 
     /**
