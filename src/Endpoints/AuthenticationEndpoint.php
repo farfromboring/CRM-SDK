@@ -55,6 +55,37 @@ class AuthenticationEndpoint extends Client
     }
 
     /**
+     * Allows a user to login from a token (usually used in email links for automated login)
+     *
+     * @param string $token
+     * @param DateTime|null $date_session_expires
+     * @return Session
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function createSessionFromLoginToken(string $token, ?DateTime $date_session_expires = null)
+    {
+        try {
+            $results = $this->get($this->endpoint.'/login-token', [
+                'token' => $token,
+                'date_expires'=>$date_session_expires ? $date_session_expires->format("Y-m-d H:i:s") : null,
+            ]);
+        }
+            //if bad request, convert to auth failure
+        catch(APIBadRequestException $e)
+        {
+            throw new AuthFailureException($e->getMessage());
+        }
+
+        return Session::create()->populateFromAPIResults($results);
+    }
+
+    /**
      * Sends the user an email with a temporary password if they forgot theirs
      *
      * Throws an APIBadRequestException if there is no account matching that email
@@ -75,35 +106,6 @@ class AuthenticationEndpoint extends Client
             'username' => $username,
             'username_label'=>$username_label,
         ]);
-    }
-
-    /**
-     * Sends the user to check for an SSO session, if one exists, it'll redirect back to the provided URL including the token in the query string
-     *
-     * @param $redirect_back_to_url
-     * @return string
-     */
-    public function getCheckSSOCookieURL($redirect_back_to_url)
-    {
-        $url = $this->getSSORedirectHost().'/session/cookie-check';
-        $query = '?redirect_url='.$redirect_back_to_url;
-
-        return $url.$query;
-    }
-
-    /**
-     * Sends the user to create a session cookie on the SSO server, then redirects them back to the provided URL
-     *
-     * @param string $token
-     * @param $redirect_back_to_url
-     * @return string
-     */
-    public function getSetSSOCookieURL(string $token, $redirect_back_to_url)
-    {
-        $url = $this->getSSORedirectHost().'/session/cookie-set';
-        $query = '?token='.$token.'&redirect_url='.$redirect_back_to_url;
-
-        return $url.$query;
     }
 
     /**
@@ -203,5 +205,34 @@ class AuthenticationEndpoint extends Client
         ]);
 
         return true;
+    }
+
+    /**
+     * Sends the user to check for an SSO session, if one exists, it'll redirect back to the provided URL including the token in the query string
+     *
+     * @param $redirect_back_to_url
+     * @return string
+     */
+    public function getCheckSSOCookieURL($redirect_back_to_url)
+    {
+        $url = $this->getSSORedirectHost().'/session/cookie-check';
+        $query = '?redirect_url='.$redirect_back_to_url;
+
+        return $url.$query;
+    }
+
+    /**
+     * Sends the user to create a session cookie on the SSO server, then redirects them back to the provided URL
+     *
+     * @param string $token
+     * @param $redirect_back_to_url
+     * @return string
+     */
+    public function getSetSSOCookieURL(string $token, $redirect_back_to_url)
+    {
+        $url = $this->getSSORedirectHost().'/session/cookie-set';
+        $query = '?token='.$token.'&redirect_url='.$redirect_back_to_url;
+
+        return $url.$query;
     }
 }
