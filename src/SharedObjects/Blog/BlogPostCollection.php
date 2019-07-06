@@ -17,6 +17,9 @@ class BlogPostCollection implements APIObjectInterface
     /** @var BlogPost[] */
     private $posts;
 
+    /** @var string */
+    private $sortedBy;
+
     /** @var int */
     private $currentPage;
 
@@ -46,6 +49,8 @@ class BlogPostCollection implements APIObjectInterface
         $this->setCategories(BlogCategoryCollection::createFromAPIResults($results['categories']));
 
         $this->setAppliedFilters(BlogFilters::create()->populateFromAPIResults($results['filters']));
+
+        $this->setSortedBy($results['sorted_by']);
 
         $this->setCurrentPage((int) $results['current_page']);
         $this->setPageLength((int) $results['page_length']);
@@ -117,6 +122,24 @@ class BlogPostCollection implements APIObjectInterface
     public function setPosts(array $posts): BlogPostCollection
     {
         $this->posts = $posts;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSortedBy(): string
+    {
+        return $this->sortedBy;
+    }
+
+    /**
+     * @param string $sortedBy
+     * @return BlogPostCollection
+     */
+    public function setSortedBy(string $sortedBy): BlogPostCollection
+    {
+        $this->sortedBy = $sortedBy;
         return $this;
     }
 

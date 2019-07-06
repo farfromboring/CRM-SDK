@@ -30,7 +30,7 @@ class BlogEndpoint extends Client
      * $filters = BlogFilters::create()->setQuery('whatever you want to search for')->addCategoryID(1);
      *
      * //get 15 posts from page 1 with the above filters applied
-     * $post_collection = BlogEndpoint::create()->getBlogPosts(1, 15, $filters);
+     * $post_collection = BlogEndpoint::create()->getBlogPosts(1, 15, BlogSortOptions::NEWEST_FIRST, $filters);
      *
      * //display search field with value from $post_collection->getAppliedFilters()->getQuery();
      *
@@ -44,6 +44,14 @@ class BlogEndpoint extends Client
      *     }
      * }
      *
+     * //display sort options
+     * echo "<select>";
+     * foreach(BlogSortOptions::dropdownOptions() as $key=>$label)
+     * {
+     *     "<option value='{$key}'>{$label}</option>";
+     * }
+     * echo "</select>";
+     *
      * foreach($post_collection->getPosts() as $post)
      * {
      *    //display each post
@@ -51,6 +59,7 @@ class BlogEndpoint extends Client
      *
      * @param int $page
      * @param int $page_length
+     * @param string|null $sort_by
      * @param BlogFilters|null $filters
      * @return BlogPostCollection
      * @throws APIBadRequestException
@@ -59,13 +68,13 @@ class BlogEndpoint extends Client
      * @throws APIResourceNotFoundException
      * @throws APIUnauthorizedException
      * @throws GuzzleException
-     * @throws \Exception
      */
-    public function getBlogPosts(int $page = 1, int $page_length = 10, ?BlogFilters $filters = null)
+    public function getBlogPosts(int $page = 1, int $page_length = 10, ?string $sort_by = null, ?BlogFilters $filters = null)
     {
         $results = $this->get($this->endpoint.'/posts', [
             'page' => $page,
             'page_length'=>$page_length,
+            'sort_by'=>$sort_by,
             'filters'=>$filters->toArray(),
         ]);
 
