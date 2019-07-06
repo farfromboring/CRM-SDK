@@ -68,6 +68,7 @@ class BlogEndpoint extends Client
      * @throws APIResourceNotFoundException
      * @throws APIUnauthorizedException
      * @throws GuzzleException
+     * @throws \Exception
      */
     public function getBlogPosts(int $page = 1, int $page_length = 10, ?string $sort_by = null, ?BlogFilters $filters = null)
     {
