@@ -20,6 +20,9 @@ class BlogPostCollection implements APIObjectInterface
     /** @var int */
     private $currentPage;
 
+    /** @var int */
+    private $pageLength;
+
     /** @var boolean */
     private $hasNextPage;
 
@@ -45,6 +48,7 @@ class BlogPostCollection implements APIObjectInterface
         $this->setAppliedFilters(BlogFilters::create()->populateFromAPIResults($results['filters']));
 
         $this->setCurrentPage((int) $results['current_page']);
+        $this->setPageLength((int) $results['page_length']);
 
         $this->setCurrentPage((bool) $results['has_next_page']);
         $this->setCurrentPage((bool) $results['has_previous_page']);
@@ -131,6 +135,24 @@ class BlogPostCollection implements APIObjectInterface
     public function setCurrentPage(int $currentPage): BlogPostCollection
     {
         $this->currentPage = $currentPage;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageLength(): int
+    {
+        return $this->pageLength;
+    }
+
+    /**
+     * @param int $pageLength
+     * @return BlogPostCollection
+     */
+    public function setPageLength(int $pageLength): BlogPostCollection
+    {
+        $this->pageLength = $pageLength;
         return $this;
     }
 
