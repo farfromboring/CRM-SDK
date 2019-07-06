@@ -158,4 +158,25 @@ class BlogEndpoint extends Client
 
         return BlogPost::create()->populateFromAPIResults($results);
     }
+
+    /**
+     * Adds a view to a blog post
+     *
+     * @param int $id
+     * @return mixed
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     * @throws \Exception
+     */
+    public function addPostView(int $id)
+    {
+        return $this->post($this->endpoint.'/view', [
+            'id'=>$id,
+        ]);
+
+    }
 }
