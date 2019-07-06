@@ -55,8 +55,8 @@ class BlogPostCollection implements APIObjectInterface
         $this->setCurrentPage((int) $results['current_page']);
         $this->setPageLength((int) $results['page_length']);
 
-        $this->setCurrentPage((bool) $results['has_next_page']);
-        $this->setCurrentPage((bool) $results['has_previous_page']);
+        $this->setHasNextPage((bool) $results['has_next_page']);
+        $this->setHasPreviousPage((bool) $results['has_previous_page']);
 
         return $this;
     }
