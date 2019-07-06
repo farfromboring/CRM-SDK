@@ -2,15 +2,15 @@
 namespace CRM_SDK\Endpoints;
 
 use CRM_SDK\Client;
-use CRM_SDK\Collections\BlogCategoryCollection;
-use CRM_SDK\Collections\BlogPostCollection;
 use CRM_SDK\Exceptions\APIBadRequestException;
 use CRM_SDK\Exceptions\APIForbiddenException;
 use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
+use CRM_SDK\SharedObjects\Blog\BlogCategoryCollection;
 use CRM_SDK\SharedObjects\Blog\BlogFilters;
 use CRM_SDK\SharedObjects\Blog\BlogPost;
+use CRM_SDK\SharedObjects\Blog\BlogPostCollection;
 use GuzzleHttp\Exception\GuzzleException;
 
 class BlogEndpoint extends Client
@@ -69,7 +69,7 @@ class BlogEndpoint extends Client
             'filters'=>$filters->toArray(),
         ]);
 
-        return BlogPostCollection::createFromAPIResults($results);
+        return BlogPostCollection::create()->populateFromAPIResults($results);
     }
 
     /**

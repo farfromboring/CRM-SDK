@@ -1,7 +1,6 @@
 <?php
 namespace CRM_SDK\SharedObjects\Blog;
 
-use CRM_SDK\Collections\BlogCategoryCollection;
 use CRM_SDK\Interfaces\APIObjectInterface;
 use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\IDToArrayTrait;

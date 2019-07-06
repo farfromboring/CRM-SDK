@@ -1,9 +1,7 @@
 <?php
-namespace CRM_SDK\Collections;
+namespace CRM_SDK\SharedObjects\Blog;
 
-use CRM_SDK\SharedObjects\Blog\BlogCategory;
-
-class BlogCategoryCollection extends AbstractCollection
+class BlogCategoryCollection extends \ArrayIterator
 {
     /**
      * @param array $results
