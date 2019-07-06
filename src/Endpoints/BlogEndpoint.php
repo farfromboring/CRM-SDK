@@ -172,7 +172,7 @@ class BlogEndpoint extends Client
      * @throws APIUnauthorizedException
      * @throws GuzzleException
      */
-    public function addPostView(int $id, ?int $user_id)
+    public function addPostView(int $id, ?int $user_id = null)
     {
         return $this->post($this->endpoint.'/view', [
             'id'=>$id,
