@@ -73,10 +73,7 @@ class BlogEndpoint extends Client
     }
 
     /**
-     * Gets blog post by permalink
-     *
-     * This endpoint WILL return drafts (which should not be displayed to the public), so do a check prior to rendering the page
-     *    use $blog_post->isDraft()
+     * Gets blog categories
      *
      * @return BlogCategoryCollection
      * @throws APIBadRequestException
@@ -95,10 +92,12 @@ class BlogEndpoint extends Client
     }
 
     /**
-     * Gets blog post by permalink
+     * Gets blog post by permalinkGet Post
      *
      * This endpoint WILL return drafts (which should not be displayed to the public), so do a check prior to rendering the page
      *    use $blog_post->isDraft()
+     *
+     * The next and previous posts are never drafts
      *
      * @param string $permalink
      * @param bool $return_next_and_previous_posts
@@ -126,6 +125,8 @@ class BlogEndpoint extends Client
      *
      * This endpoint WILL return drafts (which should not be displayed to the public), so do a check prior to rendering the page
      *    use $blog_post->isDraft()
+     *
+     * The next and previous posts are never drafts
      *
      * @param int $id
      * @param bool $return_next_and_previous_posts

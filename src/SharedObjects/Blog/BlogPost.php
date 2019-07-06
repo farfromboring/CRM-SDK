@@ -2,6 +2,8 @@
 namespace CRM_SDK\SharedObjects\Blog;
 
 use CRM_SDK\Interfaces\APIObjectInterface;
+use CRM_SDK\SharedObjects\File\File;
+use CRM_SDK\SharedObjects\User\User;
 use CRM_SDK\Traits\APIObjectTrait;
 use CRM_SDK\Traits\IDToArrayTrait;
 use CRM_SDK\Traits\IDTrait;
@@ -27,8 +29,8 @@ class BlogPost implements APIObjectInterface
     /** @var string */
     private $metaDescription;
 
-    /** @var string */
-    private $previewImgURL;
+    /** @var File|null */
+    private $previewImg;
 
     /** @var string */
     private $content;
@@ -36,7 +38,7 @@ class BlogPost implements APIObjectInterface
     /** @var integer */
     private $numViews;
 
-    /** @var string */
+    /** @var User|null */
     private $author;
 
     /** @var BlogCategoryCollection */
@@ -66,12 +68,16 @@ class BlogPost implements APIObjectInterface
         $this->setPermalink($results['permalink']);
         $this->setMetaTitle($results['meta_title']);
         $this->setMetaDescription($results['meta_description']);
-        $this->setPreviewImgURL($results['preview_img_url']);
+        if( !empty($results['preview_img']) ) {
+            $this->setPreviewImg(File::create()->populateFromAPIResults($results['preview_img']));
+        }
         $this->setContent($results['content']);
 
         $this->setNumViews((int) $results['num_views']);
 
-        $this->setAuthor($results['author']);
+        if( !empty($results['author']) ) {
+            $this->setAuthor(User::create()->populateFromAPIResults($results['author']));
+        }
 
         $this->setCategories(BlogCategoryCollection::createFromAPIResults(($results['categories'] ?: [])));
 
@@ -181,20 +187,20 @@ class BlogPost implements APIObjectInterface
     }
 
     /**
-     * @return string
+     * @return File|null
      */
-    public function getPreviewImgURL(): string
+    public function getPreviewImg(): ?File
     {
-        return $this->previewImgURL;
+        return $this->previewImg;
     }
 
     /**
-     * @param string $previewImgURL
+     * @param File|null $previewImg
      * @return BlogPost
      */
-    public function setPreviewImgURL(string $previewImgURL): BlogPost
+    public function setPreviewImg(?File $previewImg): BlogPost
     {
-        $this->previewImgURL = $previewImgURL;
+        $this->previewImg = $previewImg;
         return $this;
     }
 
@@ -235,18 +241,18 @@ class BlogPost implements APIObjectInterface
     }
 
     /**
-     * @return string
+     * @return User|null
      */
-    public function getAuthor(): string
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
     /**
-     * @param string $author
+     * @param User|null $author
      * @return BlogPost
      */
-    public function setAuthor(string $author): BlogPost
+    public function setAuthor(?User $author): BlogPost
     {
         $this->author = $author;
         return $this;
