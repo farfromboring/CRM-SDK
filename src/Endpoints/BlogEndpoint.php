@@ -163,6 +163,7 @@ class BlogEndpoint extends Client
      * Adds a view to a blog post
      *
      * @param int $id
+     * @param int|null $user_id
      * @return mixed
      * @throws APIBadRequestException
      * @throws APIForbiddenException
@@ -170,12 +171,12 @@ class BlogEndpoint extends Client
      * @throws APIResourceNotFoundException
      * @throws APIUnauthorizedException
      * @throws GuzzleException
-     * @throws \Exception
      */
-    public function addPostView(int $id)
+    public function addPostView(int $id, ?int $user_id)
     {
         return $this->post($this->endpoint.'/view', [
             'id'=>$id,
+            'user_id'=>$user_id
         ]);
 
     }
