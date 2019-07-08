@@ -64,6 +64,60 @@ class AddressEndpoint extends Client
     }
 
     /**
+     * Gets the primary shipping address for a company
+     *
+     * @param int $company_id
+     * @return Address
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     * @throws \Exception
+     */
+    public function getPrimaryShippingAddress(int $company_id)
+    {
+        $results = $this->get($this->endpoint.'/primary-shipping', [
+            'company_id'=>$company_id
+        ]);
+
+        if( !$results )
+        {
+            return null;
+        }
+
+        return Address::create()->populateFromAPIResults($results);
+    }
+
+    /**
+     * Gets the primary billing address for a company
+     *
+     * @param int $company_id
+     * @return Address
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     * @throws \Exception
+     */
+    public function getPrimaryBillingAddress(int $company_id)
+    {
+        $results = $this->get($this->endpoint.'/primary-billing', [
+            'company_id'=>$company_id
+        ]);
+
+        if( !$results )
+        {
+            return null;
+        }
+
+        return Address::create()->populateFromAPIResults($results);
+    }
+
+    /**
      * Allows you to add a new address to a company
      *
      * @param int $company_id
