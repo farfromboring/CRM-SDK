@@ -19,6 +19,7 @@ class AddressEndpoint extends Client
      *
      * @param int $company_id
      * @param Address $address
+     * @param bool $set_as_company_headquarters
      * @return Address
      * @throws APIBadRequestException
      * @throws APIForbiddenException
@@ -28,11 +29,12 @@ class AddressEndpoint extends Client
      * @throws GuzzleException
      * @throws \Exception
      */
-    public function addAddress(int $company_id, Address &$address)
+    public function addAddress(int $company_id, Address &$address, $set_as_company_headquarters = false)
     {
         $results = $this->post($this->endpoint, [
             'company_id'=>$company_id,
             'address'=>$address->toArray(),
+            'company_hq'=>$set_as_company_headquarters,
         ]);
 
         return Address::create()->populateFromAPIResults($results);
@@ -47,6 +49,7 @@ class AddressEndpoint extends Client
      * If that happens the Address object that is returned will contain the new address ID
      *
      * @param Address $address
+     * @param bool $set_as_company_headquarters
      * @return Address
      * @throws APIBadRequestException
      * @throws APIForbiddenException
@@ -56,10 +59,11 @@ class AddressEndpoint extends Client
      * @throws GuzzleException
      * @throws \Exception
      */
-    public function updateAddress(Address &$address)
+    public function updateAddress(Address &$address, $set_as_company_headquarters = false)
     {
         $results = $this->patch($this->endpoint, [
             'address'=>$address->toArray(),
+            'company_hq'=>$set_as_company_headquarters,
         ]);
 
         return Address::create()->populateFromAPIResults($results);
