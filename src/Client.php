@@ -115,6 +115,10 @@ class Client implements EndpointInterface
         //convert null to "NULL" since it gets stripped from the request by Guzzle. The API will automatically swap "NULL" back to null.
         $data = self::convertNullToString($data);
 
+        //convert bools to string version of the bool because Guzzle will change to 1 and 0.
+        //this would normally be fine, but the API's generic request cleanup and value checking cannot differentiate
+        $data = self::convertBoolToString($data);
+
         if( $data ) {
             //get param based on method
             $param = in_array($method, ['PATCH','POST']) ? 'form_params' : 'query';
@@ -191,6 +195,38 @@ class Client implements EndpointInterface
             {
                 $data[$k] = is_null($v) ? 'NULL' : $v;
             }
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     * @throws APIBadRequestException
+     */
+    public static function convertBoolToString(array $data)
+    {
+        foreach($data as $k=>$v)
+        {
+            //shouldn't happen, but since I'm already checking, might as well add it
+            if( is_object($v) )
+            {
+                throw new APIBadRequestException('Objects are not allowed');
+            }
+
+            //if it's an array, run it through the same method
+            if( is_array($v) )
+            {
+                $data[$k] = self::convertNullToString($v);
+            }
+            //otherwise if it's a bool, convert to a string
+            elseif( is_bool($v) )
+            {
+                $v = $v ? 'true' : 'false';
+            }
+
+            $data[$k] = $v;
         }
 
         return $data;
