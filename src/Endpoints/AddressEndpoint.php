@@ -42,6 +42,28 @@ class AddressEndpoint extends Client
     }
 
     /**
+     * Gets an address
+     *
+     * @param int $address_id
+     * @return Address
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     * @throws \Exception
+     */
+    public function getAddress(int $address_id)
+    {
+        $results = $this->get($this->endpoint, [
+            'address_id'=>$address_id
+        ]);
+
+        return Address::create()->populateFromAPIResults($results);
+    }
+
+    /**
      * Allows you to add a new address to a company
      *
      * @param int $company_id
