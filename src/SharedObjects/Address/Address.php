@@ -90,6 +90,52 @@ class Address implements APIObjectInterface
     }
 
     /**
+     * @param string $recipient
+     * @return string
+     */
+    public function getAsString($recipient = '')
+    {
+        $addr = '';
+
+        if( $recipient )
+        {
+            $addr .= $recipient."\n";
+        }
+
+        if( $this->isBusiness() )
+        {
+            $addr .= $this->getBusinessName()."\n";
+        }
+
+        $addr .= $this->getAddress() . "\n";
+
+        if( $this->getAddress2() )
+        {
+            $addr .= $this->getAddress2() . "\n";
+        }
+
+        $addr .= $this->getCity();
+
+        if( $this->getState() )
+        {
+            $addr .= ', ' . $this->getState() . "\n";
+        }
+        else
+        {
+            $addr .=  "\n";
+        }
+
+        if( $this->getZipcode() )
+        {
+            $addr .= $this->getZipcode()." ";
+        }
+
+        $addr .= $this->getCountryCode();
+
+        return trim($addr);
+    }
+
+    /**
      * @return bool
      */
     public function isBusiness(): bool

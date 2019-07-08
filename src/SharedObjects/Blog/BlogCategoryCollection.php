@@ -19,7 +19,7 @@ class BlogCategoryCollection extends \ArrayIterator
     }
 
     /**
-     * Returns the an array with the key as the category ID and the value as the category name
+     * Returns an array with the key as the category ID and the value as the category name
      *
      * @return string[]
      */

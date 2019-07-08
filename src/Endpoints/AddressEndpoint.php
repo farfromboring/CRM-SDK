@@ -8,11 +8,38 @@ use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
 use CRM_SDK\SharedObjects\Address\Address;
+use CRM_SDK\SharedObjects\Address\AddressCollection;
 use GuzzleHttp\Exception\GuzzleException;
 
 class AddressEndpoint extends Client
 {
     protected $endpoint ='/address';
+
+    /**
+     * Gets addresses for a given company
+     *
+     * @param int $company_id
+     * @param bool $include_shipping
+     * @param bool $include_billing
+     * @return AddressCollection
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     * @throws \Exception
+     */
+    public function getAddresses(int $company_id, $include_shipping = false, $include_billing = false)
+    {
+        $results = $this->get($this->endpoint, [
+            'company_id' => $company_id,
+            'include_shipping'=>$include_shipping,
+            'include_billing'=>$include_billing,
+        ]);
+
+        return AddressCollection::createFromAPIResults($results['addresses']);
+    }
 
     /**
      * Allows you to add a new address to a company
