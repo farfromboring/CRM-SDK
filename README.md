@@ -59,6 +59,9 @@ Example:
 WEBWISEUSA_CRM_API_KEY="dev_[api_key_here]"
 ```
 
+## Client User
+Each action taken stores a historical record of what was done. To accurately tie this change to the user making it, a client_user_id is automatically added to each request. This value is pulled from $_ENV['CLIENT_USER_ID']. On each request, you should set this value to the current Guest or User's ID.
+
 ## Usage
 
 A sample of the addUser method:

@@ -110,6 +110,7 @@ class Client implements EndpointInterface
         //add IP and user agent to every request
         $data['client_ip'] = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
         $data['client_user_agent'] = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+        $data['client_user_id'] = !empty($_ENV['CLIENT_USER_ID']) ? $_ENV['CLIENT_USER_ID'] : null;
 
         //convert null to "NULL" since it gets stripped from the request by Guzzle. The API will automatically swap "NULL" back to null.
         $data = self::convertNullToString($data);
