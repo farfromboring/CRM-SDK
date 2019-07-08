@@ -218,7 +218,7 @@ class Client implements EndpointInterface
             //if it's an array, run it through the same method
             if( is_array($v) )
             {
-                $v = self::convertNullToString($v);
+                $v = self::convertBoolToString($v);
             }
             //otherwise if it's a bool, convert to a string
             elseif( is_bool($v) )
