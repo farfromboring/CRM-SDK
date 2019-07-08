@@ -223,7 +223,7 @@ class Client implements EndpointInterface
             //otherwise if it's a bool, convert to a string
             elseif( is_bool($v) )
             {
-                $v = $v ? 'true' : 'false';
+                $v = $v ? '[true]' : '[false]';
             }
 
             $data[$k] = $v;
