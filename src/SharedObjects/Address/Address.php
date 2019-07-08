@@ -11,7 +11,7 @@ class Address implements APIObjectInterface
     use IDTrait;
 
     /** @var boolean */
-    private $isBusiness;
+    private $isBusiness = true;
     /** @var string|null */
     private $businessName;
 
@@ -24,17 +24,17 @@ class Address implements APIObjectInterface
     /** @var boolean */
     private $isPrimaryBillingAddress = true;
 
-    /** @var string */
+    /** @var string|null */
     private $address;
     /** @var string|null */
     private $address2;
-    /** @var string */
+    /** @var string|null */
     private $city;
-    /** @var string */
+    /** @var string|null */
     private $state;
-    /** @var string */
+    /** @var string|null */
     private $zipcode;
-    /** @var string */
+    /** @var string|null */
     private $countryCode;
 
     /**
@@ -192,24 +192,6 @@ class Address implements APIObjectInterface
     /**
      * @return bool
      */
-    public function isBillingAddress(): bool
-    {
-        return $this->isBillingAddress;
-    }
-
-    /**
-     * @param bool $isBillingAddress
-     * @return Address
-     */
-    public function setIsBillingAddress(bool $isBillingAddress): Address
-    {
-        $this->isBillingAddress = $isBillingAddress;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
     public function isPrimaryShippingAddress(): bool
     {
         return $this->isPrimaryShippingAddress;
@@ -222,6 +204,24 @@ class Address implements APIObjectInterface
     public function setIsPrimaryShippingAddress(bool $isPrimaryShippingAddress): Address
     {
         $this->isPrimaryShippingAddress = $isPrimaryShippingAddress;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBillingAddress(): bool
+    {
+        return $this->isBillingAddress;
+    }
+
+    /**
+     * @param bool $isBillingAddress
+     * @return Address
+     */
+    public function setIsBillingAddress(bool $isBillingAddress): Address
+    {
+        $this->isBillingAddress = $isBillingAddress;
         return $this;
     }
 
@@ -244,18 +244,18 @@ class Address implements APIObjectInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
     /**
-     * @param string $address
+     * @param string|null $address
      * @return Address
      */
-    public function setAddress(string $address): Address
+    public function setAddress(?string $address): Address
     {
         $this->address = $address;
         return $this;
@@ -280,72 +280,72 @@ class Address implements APIObjectInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
     /**
-     * @param string $city
+     * @param string|null $city
      * @return Address
      */
-    public function setCity(string $city): Address
+    public function setCity(?string $city): Address
     {
         $this->city = $city;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState(): string
+    public function getState(): ?string
     {
         return $this->state;
     }
 
     /**
-     * @param string $state
+     * @param string|null $state
      * @return Address
      */
-    public function setState(string $state): Address
+    public function setState(?string $state): Address
     {
         $this->state = $state;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZipcode(): string
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
 
     /**
-     * @param string $zipcode
+     * @param string|null $zipcode
      * @return Address
      */
-    public function setZipcode(string $zipcode): Address
+    public function setZipcode(?string $zipcode): Address
     {
         $this->zipcode = $zipcode;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountryCode(): string
+    public function getCountryCode(): ?string
     {
         return $this->countryCode;
     }
 
     /**
-     * @param string $countryCode
+     * @param string|null $countryCode
      * @return Address
      */
-    public function setCountryCode(string $countryCode): Address
+    public function setCountryCode(?string $countryCode): Address
     {
         $this->countryCode = $countryCode;
         return $this;
