@@ -32,7 +32,7 @@ class AddressEndpoint extends Client
      */
     public function getAddresses(int $company_id, $include_shipping = false, $include_billing = false)
     {
-        $results = $this->get($this->endpoint, [
+        $results = $this->get($this->endpoint.'es', [
             'company_id' => $company_id,
             'include_shipping'=>$include_shipping,
             'include_billing'=>$include_billing,
