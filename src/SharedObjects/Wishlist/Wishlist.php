@@ -2,7 +2,6 @@
 namespace CRM_SDK\SharedObjects\Wishlist;
 
 use CRM_SDK\Interfaces\APIObjectInterface;
-use CRM_SDK\SharedObjects\Product\WishlistProduct;
 use CRM_SDK\Traits\APIObjectTrait;
 
 class Wishlist implements APIObjectInterface

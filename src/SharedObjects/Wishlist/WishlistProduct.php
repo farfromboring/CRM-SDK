@@ -1,6 +1,7 @@
 <?php
-namespace CRM_SDK\SharedObjects\Product;
+namespace CRM_SDK\SharedObjects\Wishlist;
 
+use CRM_SDK\SharedObjects\Product\Product;
 use CRM_SDK\Traits\APIObjectTrait;
 
 class WishlistProduct extends Product
