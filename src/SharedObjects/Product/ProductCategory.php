@@ -13,7 +13,7 @@ class ProductCategory implements APIObjectInterface
         IDToArrayTrait::toArray insteadof IDAndNameTrait;
     }
 
-    /** @var ProductCategory */
+    /** @var ProductCategory|null */
     private $parent;
 
     /**
@@ -37,18 +37,18 @@ class ProductCategory implements APIObjectInterface
     }
 
     /**
-     * @return ProductCategory
+     * @return ProductCategory|null
      */
-    public function getParent(): ProductCategory
+    public function getParent(): ?ProductCategory
     {
         return $this->parent;
     }
 
     /**
-     * @param ProductCategory $parent
+     * @param ProductCategory|null $parent
      * @return ProductCategory
      */
-    public function setParent(ProductCategory $parent): ProductCategory
+    public function setParent(?ProductCategory $parent): ProductCategory
     {
         $this->parent = $parent;
         return $this;
