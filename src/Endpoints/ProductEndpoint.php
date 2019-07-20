@@ -27,6 +27,7 @@ class ProductEndpoint extends Client
      * @throws APIResourceNotFoundException
      * @throws APIUnauthorizedException
      * @throws GuzzleException
+     * @throws \Exception
      */
     public function getProduct(int $product_id, int $include_how_many_related_products = 0)
     {

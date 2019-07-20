@@ -25,7 +25,7 @@ class ProductCategory implements APIObjectInterface
     {
         $this->setId((int) $results['id']);
         $this->setName($results['name']);
-        if( !empty($results['parent']) )
+        if( !empty($results['parent_id']) )
         {
             $this->setParent(ProductCategory::create()->populateFromAPIResults([
                 'id'=>$results['parent_id'],
