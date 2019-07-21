@@ -173,7 +173,7 @@ class Product implements APIObjectInterface
         {
             $this->setColors(!empty($results['attributes']['colors']) ? $results['attributes']['colors'] : null);
             $this->setSizes(!empty($results['attributes']['sizes']) ? $results['attributes']['sizes'] : null);
-            $this->setMaterials(!empty($results['attributes']['materials']) ? $results['attributes']['colors'] : null);
+            $this->setMaterials(!empty($results['attributes']['materials']) ? $results['attributes']['materials'] : null);
             $this->setThemes(!empty($results['attributes']['themes']) ? $results['attributes']['themes'] : null);
             $this->setShapes(!empty($results['attributes']['shapes']) ? $results['attributes']['shapes'] : null);
         }
