@@ -40,6 +40,8 @@ class CartItemEndpoint extends Client
     /**
      * Adds an item to a cart
      *
+     * $data can contain values for cost_per_unit, price_per_unit, decoration, attributes, and more
+     *
      * @param int $user_id
      * @param int $product_id
      * @param int $quantity
@@ -68,7 +70,7 @@ class CartItemEndpoint extends Client
     /**
      * Updates an item in a cart
      *
-     * $data can contain values for quantity, decoration, attributes and more
+     * $data can contain values for quantity, cost_per_unit, price_per_unit, decoration, attributes and more
      *
      * @param int $cart_item_id
      * @param array $data
