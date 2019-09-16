@@ -13,17 +13,25 @@ class CartItem implements APIObjectInterface
     use IDTrait;
     use DateAddedTrait;
 
+    /** @var string */
+    private $name;
+
     /** @var bool */
     private $requiresProof = true;
     /** @var bool */
     private $hasDecoration = true;
 
     /** @var int */
-    private $quantity = 0;
+    private $productQuantity = 0;
+
     /** @var float */
-    private $cost = 0;
+    private $totalCost = 0;
     /** @var float */
-    private $price = 0;
+    private $totalPrice = 0;
+    /** @var float */
+    private $totalMarginAmount = 0;
+    /** @var float */
+    private $totalMarginPercent = 0;
 
     /** @var \DateTime|null */
     private $dateUpdated;
@@ -31,14 +39,32 @@ class CartItem implements APIObjectInterface
     /** @var CartItemArtwork[] */
     private $artwork = [];
 
+    /** @var ProductVariation[] */
+    private $productVariations = [];
+
+    /** @var float */
+    private $productCost = 0;
+    /** @var float */
+    private $productPrice = 0;
+    /** @var float */
+    private $productMarginAmount = 0;
+    /** @var float */
+    private $productMarginPercent = 0;
+
     /** @var LineItem[] */
     private $lineItems = [];
 
+    /** @var float */
+    private $lineItemCost = 0;
+    /** @var float */
+    private $lineItemPrice = 0;
+    /** @var float */
+    private $lineItemMarginAmount = 0;
+    /** @var float */
+    private $lineItemMarginPercent = 0;
+
     /** @var Product */
     private $product;
-
-    /** @var LineItem */
-    private $productLineItem;
 
     /** @var CartItemDecoration */
     private $decoration;
@@ -51,12 +77,27 @@ class CartItem implements APIObjectInterface
     public function populateFromAPIResults(array $results)
     {
         $this->setId((int) $results['id']);
+        $this->setName($results['name']);
+
         $this->setRequiresProof($results['requires_proof']);
         $this->setHasDecoration($results['has_decoration']);
 
-        $this->setQuantity((int) $results['quantity']);
-        $this->setCost((float) $results['cost']);
-        $this->setPrice((float) $results['price']);
+        $this->setProductQuantity((int) $results['product_quantity']);
+
+        $this->setTotalCost((float) $results['total_cost']);
+        $this->setTotalPrice((float) $results['total_price']);
+        $this->setTotalMarginAmount((float) $results['total_margin_amount']);
+        $this->setTotalMarginPercent((float) $results['total_margin_percent']);
+
+        $this->setProductCost((float) $results['product_cost']);
+        $this->setProductPrice((float) $results['product_price']);
+        $this->setProductMarginAmount((float) $results['product_margin_amount']);
+        $this->setProductMarginPercent((float) $results['product_margin_percent']);
+
+        $this->setLineItemCost((float) $results['line_item_cost']);
+        $this->setLineItemPrice((float) $results['line_item_price']);
+        $this->setLineItemMarginAmount((float) $results['line_item_margin_amount']);
+        $this->setLineItemMarginPercent((float) $results['line_item_margin_percent']);
 
         $this->setDateUpdated((!empty($results['date_updated']) ? new \DateTime($results['date_updated']) : null));
         $this->setDateAdded((!empty($results['date_added']) ? new \DateTime($results['date_added']) : null));
@@ -66,15 +107,19 @@ class CartItem implements APIObjectInterface
             $line_items = [];
             foreach($results['line_items'] as $line_item)
             {
-                //if product
-                if( $line_item['type']['id'] == 1 )
-                {
-                    $this->setProductLineItem(LineItem::create()->populateFromAPIResults($line_item));
-                }
-
                 $line_items[] = LineItem::create()->populateFromAPIResults($line_item);
             }
             $this->setLineItems($line_items);
+        }
+
+        if( !empty($results['product_variations']) )
+        {
+            $product_variations = [];
+            foreach($results['product_variations'] as $variation)
+            {
+                $product_variations[] = ProductVariation::create()->populateFromAPIResults($variation);
+            }
+            $this->setProductVariations($product_variations);
         }
 
         if( !empty($results['decoration']) && $this->isHasDecoration() )
@@ -107,14 +152,33 @@ class CartItem implements APIObjectInterface
     {
         return [
             'id'=>$this->getId(),
+            'name'=>$this->getName(),
             'requires_proof'=>$this->isRequiresProof(),
             'has_decoration'=>$this->isHasDecoration(),
-            'quantity'=>$this->getQuantity(),
+            'product_variations'=>null,
             'line_items'=>null,
             'decoration'=>($this->getDecoration() ? $this->getDecoration()->toArray() : null),
             'artwork'=>null,
             'product_id'=>($this->getProduct() ? $this->getProduct()->getId() : null),
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return CartItem
+     */
+    public function setName(string $name): CartItem
+    {
+        $this->name = $name;
+        return $this;
     }
 
     /**
@@ -156,54 +220,252 @@ class CartItem implements APIObjectInterface
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getProductQuantity(): int
     {
-        return $this->quantity;
+        return $this->productQuantity;
     }
 
     /**
-     * @param int $quantity
+     * @param int $productQuantity
      * @return CartItem
      */
-    public function setQuantity(int $quantity): CartItem
+    public function setProductQuantity(int $productQuantity): CartItem
     {
-        $this->quantity = $quantity;
+        $this->productQuantity = $productQuantity;
         return $this;
     }
 
     /**
      * @return float
      */
-    public function getCost(): float
+    public function getTotalCost(): float
     {
-        return $this->cost;
+        return $this->totalCost;
     }
 
     /**
-     * @param float $cost
+     * @param float $totalCost
      * @return CartItem
      */
-    public function setCost(float $cost): CartItem
+    public function setTotalCost(float $totalCost): CartItem
     {
-        $this->cost = $cost;
+        $this->totalCost = $totalCost;
         return $this;
     }
 
     /**
      * @return float
      */
-    public function getPrice(): float
+    public function getTotalPrice(): float
     {
-        return $this->price;
+        return $this->totalPrice;
     }
 
     /**
-     * @param float $price
+     * @param float $totalPrice
      * @return CartItem
      */
-    public function setPrice(float $price): CartItem
+    public function setTotalPrice(float $totalPrice): CartItem
     {
-        $this->price = $price;
+        $this->totalPrice = $totalPrice;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalMarginAmount(): float
+    {
+        return $this->totalMarginAmount;
+    }
+
+    /**
+     * @param float $totalMarginAmount
+     * @return CartItem
+     */
+    public function setTotalMarginAmount(float $totalMarginAmount): CartItem
+    {
+        $this->totalMarginAmount = $totalMarginAmount;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalMarginPercent(): float
+    {
+        return $this->totalMarginPercent;
+    }
+
+    /**
+     * @param float $totalMarginPercent
+     * @return CartItem
+     */
+    public function setTotalMarginPercent(float $totalMarginPercent): CartItem
+    {
+        $this->totalMarginPercent = $totalMarginPercent;
+        return $this;
+    }
+
+    /**
+     * @return ProductVariation[]
+     */
+    public function getProductVariations(): array
+    {
+        return $this->productVariations;
+    }
+
+    /**
+     * @param ProductVariation[] $productVariations
+     * @return CartItem
+     */
+    public function setProductVariations(array $productVariations): CartItem
+    {
+        $this->productVariations = $productVariations;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getProductCost(): float
+    {
+        return $this->productCost;
+    }
+
+    /**
+     * @param float $productCost
+     * @return CartItem
+     */
+    public function setProductCost(float $productCost): CartItem
+    {
+        $this->productCost = $productCost;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getProductPrice(): float
+    {
+        return $this->productPrice;
+    }
+
+    /**
+     * @param float $productPrice
+     * @return CartItem
+     */
+    public function setProductPrice(float $productPrice): CartItem
+    {
+        $this->productPrice = $productPrice;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getProductMarginAmount(): float
+    {
+        return $this->productMarginAmount;
+    }
+
+    /**
+     * @param float $productMarginAmount
+     * @return CartItem
+     */
+    public function setProductMarginAmount(float $productMarginAmount): CartItem
+    {
+        $this->productMarginAmount = $productMarginAmount;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getProductMarginPercent(): float
+    {
+        return $this->productMarginPercent;
+    }
+
+    /**
+     * @param float $productMarginPercent
+     * @return CartItem
+     */
+    public function setProductMarginPercent(float $productMarginPercent): CartItem
+    {
+        $this->productMarginPercent = $productMarginPercent;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLineItemCost(): float
+    {
+        return $this->lineItemCost;
+    }
+
+    /**
+     * @param float $lineItemCost
+     * @return CartItem
+     */
+    public function setLineItemCost(float $lineItemCost): CartItem
+    {
+        $this->lineItemCost = $lineItemCost;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLineItemPrice(): float
+    {
+        return $this->lineItemPrice;
+    }
+
+    /**
+     * @param float $lineItemPrice
+     * @return CartItem
+     */
+    public function setLineItemPrice(float $lineItemPrice): CartItem
+    {
+        $this->lineItemPrice = $lineItemPrice;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLineItemMarginAmount(): float
+    {
+        return $this->lineItemMarginAmount;
+    }
+
+    /**
+     * @param float $lineItemMarginAmount
+     * @return CartItem
+     */
+    public function setLineItemMarginAmount(float $lineItemMarginAmount): CartItem
+    {
+        $this->lineItemMarginAmount = $lineItemMarginAmount;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLineItemMarginPercent(): float
+    {
+        return $this->lineItemMarginPercent;
+    }
+
+    /**
+     * @param float $lineItemMarginPercent
+     * @return CartItem
+     */
+    public function setLineItemMarginPercent(float $lineItemMarginPercent): CartItem
+    {
+        $this->lineItemMarginPercent = $lineItemMarginPercent;
         return $this;
     }
 
