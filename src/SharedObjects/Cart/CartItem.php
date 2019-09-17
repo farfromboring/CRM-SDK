@@ -69,6 +69,9 @@ class CartItem implements APIObjectInterface
     /** @var CartItemDecoration */
     private $decoration;
 
+    /** @var string|null */
+    private $customizationNotes;
+
     /**
      * @param array $results
      * @return CartItem
@@ -83,6 +86,7 @@ class CartItem implements APIObjectInterface
         $this->setHasDecoration($results['has_decoration']);
 
         $this->setProductQuantity((int) $results['product_quantity']);
+        $this->setCustomizationNotes($results['customization_notes']);
 
         $this->setTotalCost((float) $results['total_cost']);
         $this->setTotalPrice((float) $results['total_price']);
@@ -160,6 +164,7 @@ class CartItem implements APIObjectInterface
             'decoration'=>($this->getDecoration() ? $this->getDecoration()->toArray() : null),
             'artwork'=>null,
             'product_id'=>($this->getProduct() ? $this->getProduct()->getId() : null),
+            'customization_notes'=>$this->getCustomizationNotes(),
         ];
     }
 
@@ -574,6 +579,24 @@ class CartItem implements APIObjectInterface
     public function setArtwork(array $artwork): CartItem
     {
         $this->artwork = $artwork;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCustomizationNotes(): ?string
+    {
+        return $this->customizationNotes;
+    }
+
+    /**
+     * @param string|null $customizationNotes
+     * @return CartItem
+     */
+    public function setCustomizationNotes(?string $customizationNotes): CartItem
+    {
+        $this->customizationNotes = $customizationNotes;
         return $this;
     }
 }
