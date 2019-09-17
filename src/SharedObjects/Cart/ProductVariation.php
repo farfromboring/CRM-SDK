@@ -15,6 +15,9 @@ class ProductVariation implements APIObjectInterface
     /** @var bool */
     private $isTaxable = true;
 
+    /** @var string|null */
+    private $variationNotes;
+
     /** @var int */
     private $quantity = 0;
     /** @var float */
@@ -61,6 +64,44 @@ class ProductVariation implements APIObjectInterface
     }
 
     /**
+     * @param bool $include_labels
+     * @param string $separator
+     * @return string
+     */
+    public function getDescriptionAsString($include_labels = true, $separator = ', '){
+        $attrs = [];
+
+        if( $this->getSize() ){
+            $attr = $include_labels ? 'Size:' : '';
+            $attr .= $this->getSize();
+            $attrs[] = $attr;
+        }
+        if( $this->getColor() ){
+            $attr = $include_labels ? 'Color:' : '';
+            $attr .= $this->getColor();
+            $attrs[] = $attr;
+        }
+        if( $this->getMaterial() ){
+            $attr = $include_labels ? 'Material:' : '';
+            $attr .= $this->getMaterial();
+            $attrs[] = $attr;
+        }
+        if( $this->getShape() ){
+            $attr = $include_labels ? 'Shape:' : '';
+            $attr .= $this->getShape();
+            $attrs[] = $attr;
+        }
+
+        if( $this->getVariationNotes() ){
+            $attr = $include_labels ? 'Variation:' : '';
+            $attr .= $this->getVariationNotes();
+            $attrs[] = $attr;
+        }
+
+        return implode($separator, $attrs);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -73,11 +114,30 @@ class ProductVariation implements APIObjectInterface
             'color'=>$this->getColor(),
             'material'=>$this->getMaterial(),
             'shape'=>$this->getShape(),
+            'variation_notes'=>$this->getVariationNotes(),
             'cost'=>$this->getCost(),
             'price'=>$this->getPrice(),
             'total_cost'=>$this->getTotalCost(),
             'total_price'=>$this->getTotalPrice(),
         ];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getVariationNotes(): ?string
+    {
+        return $this->variationNotes;
+    }
+
+    /**
+     * @param string|null $variationNotes
+     * @return ProductVariation
+     */
+    public function setVariationNotes(?string $variationNotes): ProductVariation
+    {
+        $this->variationNotes = $variationNotes;
+        return $this;
     }
 
     /**
