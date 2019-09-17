@@ -65,8 +65,6 @@ class LineItem implements APIObjectInterface
             'quantity'=>$this->getQuantity(),
             'cost'=>$this->getCost(),
             'price'=>$this->getPrice(),
-            'total_cost'=>$this->getTotalCost(),
-            'total_price'=>$this->getTotalPrice(),
             'type_id'=>$this->getType()->getId(),
         ];
     }
