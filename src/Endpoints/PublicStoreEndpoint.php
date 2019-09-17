@@ -80,6 +80,19 @@ class PublicStoreEndpoint extends Client
     }
 
     /**
+     * @return array
+     * @throws APIBadRequestException
+     * @throws APIForbiddenException
+     * @throws APIInternalServerErrorException
+     * @throws APIResourceNotFoundException
+     * @throws APIUnauthorizedException
+     * @throws GuzzleException
+     */
+    public function getAllPageRoutes(){
+        return $this->get($this->endpoint.'/all-page-routes');
+    }
+
+    /**
      * @param Sidebar $sidebar
      * @return Sidebar
      * @throws APIBadRequestException
