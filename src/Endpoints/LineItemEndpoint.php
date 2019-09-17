@@ -8,18 +8,18 @@ use CRM_SDK\Exceptions\APIInternalServerErrorException;
 use CRM_SDK\Exceptions\APIResourceNotFoundException;
 use CRM_SDK\Exceptions\APIUnauthorizedException;
 use CRM_SDK\SharedObjects\Cart\Cart;
-use CRM_SDK\SharedObjects\Cart\CartItem;
+use CRM_SDK\SharedObjects\Cart\LineItem;
 use GuzzleHttp\Exception\GuzzleException;
 
-class CartItemEndpoint extends Client
+class LineItemEndpoint extends Client
 {
-    protected $endpoint ='/cart/item';
+    protected $endpoint ='/cart/line-item';
 
     /**
-     * Gets an item from a cart
+     * Gets a line item from a cart
      *
-     * @param int $cart_item_id
-     * @return CartItem
+     * @param int $line_item_id
+     * @return LineItem
      * @throws APIBadRequestException
      * @throws APIForbiddenException
      * @throws APIInternalServerErrorException
@@ -28,25 +28,26 @@ class CartItemEndpoint extends Client
      * @throws GuzzleException
      * @throws \Exception
      */
-    public function getItem(int $cart_item_id)
+    public function getLineItem(int $line_item_id)
     {
         $results = $this->get($this->endpoint, [
-            'cart_item_id' => $cart_item_id,
+            'line_item_id' => $line_item_id,
         ]);
 
-        return CartItem::create()->populateFromAPIResults($results);
+        return LineItem::create()->populateFromAPIResults($results);
     }
 
     /**
-     * Adds an item to a cart
+     * Adds a line item to a cart item
      *
-     * $data can contain values for cost_per_unit, price_per_unit, decoration, attributes, and more
+     * $data can contain values for quantity, cost, price, name and more
      *
      * @param int $user_id
-     * @param int $product_id
+     * @param int $cart_item_id
      * @param int $quantity
+     * @param int $type_id
      * @param array $data
-     * @return CartItem
+     * @return LineItem
      * @throws APIBadRequestException
      * @throws APIForbiddenException
      * @throws APIInternalServerErrorException
@@ -55,26 +56,27 @@ class CartItemEndpoint extends Client
      * @throws GuzzleException
      * @throws \Exception
      */
-    public function addItem(int $user_id, int $product_id, int $quantity, array $data = [])
+    public function addLineItem(int $user_id, int $cart_item_id, int $quantity, ?int $type_id = null, array $data = [])
     {
         $results = $this->post($this->endpoint, [
             'user_id' => $user_id,
-            'product_id'=>$product_id,
+            'cart_item_id'=>$cart_item_id,
             'quantity'=>$quantity,
+            'type_id'=>$type_id,
             'data'=>$data
         ]);
 
-        return CartItem::create()->populateFromAPIResults($results);
+        return LineItem::create()->populateFromAPIResults($results);
     }
 
     /**
-     * Updates an item in a cart
+     * Updates a line item in a cart
      *
-     * $data can contain values for quantity, cost_per_unit, price_per_unit, decoration, attributes and more
+     * $data can contain values for quantity, cost, price, name and more
      *
-     * @param int $cart_item_id
+     * @param int $line_item_id
      * @param array $data
-     * @return CartItem
+     * @return LineItem
      * @throws APIBadRequestException
      * @throws APIForbiddenException
      * @throws APIInternalServerErrorException
@@ -83,20 +85,20 @@ class CartItemEndpoint extends Client
      * @throws GuzzleException
      * @throws \Exception
      */
-    public function updateItem(int $cart_item_id, array $data = [])
+    public function updateLineItem(int $line_item_id, array $data = [])
     {
         $results = $this->patch($this->endpoint, [
-            'cart_item_id'=>$cart_item_id,
+            'line_item_id'=>$line_item_id,
             'data'=>$data
         ]);
 
-        return CartItem::create()->populateFromAPIResults($results);
+        return LineItem::create()->populateFromAPIResults($results);
     }
 
     /**
-     * Removes an item from a cart
+     * Removes a line item from a cart
      *
-     * @param int $cart_item_id
+     * @param int $line_item_id
      * @return Cart|null
      * @throws APIBadRequestException
      * @throws APIForbiddenException
@@ -105,10 +107,10 @@ class CartItemEndpoint extends Client
      * @throws APIUnauthorizedException
      * @throws GuzzleException
      */
-    public function removeItem(int $cart_item_id)
+    public function removeLineItem(int $line_item_id)
     {
         return $this->delete($this->endpoint, [
-            'cart_item_id'=>$cart_item_id
+            'line_item_id'=>$line_item_id
         ]);
     }
 }
